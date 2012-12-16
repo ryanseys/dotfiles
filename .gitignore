@@ -5,3 +5,5 @@
 !.profile
 !.gitignore
 !.hushlogin
+!.bashrc
+!.bash_profile
