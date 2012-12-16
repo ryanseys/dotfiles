@@ -6,3 +6,5 @@ alias ls='ls -G'
 alias ll='ls -l'
 alias la='ls -a'
 alias please='sudo'
+alias o.o="ls"
+alias x.x="rm"
