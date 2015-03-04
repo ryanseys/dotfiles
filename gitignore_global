@@ -1,0 +1,6 @@
+# Global gitignore file set with git config --global core.excludesfile ~/.gitignore_global
+node_modules
+.DS_Store
+*.db
+*.log
+.Rhistory

@@ -1,0 +1,43 @@
+[user]
+	name = Ryan Seys
+	email = ryan@ryanseys.com
+[core]
+	excludesfile = ~/.gitignore_global
+	editor = vim
+[push]
+	default = simple
+[color]
+	diff = always
+	ui = true
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red
+  new = green
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[diff]
+	algorithm = patience
+[alias]
+  lg = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  st = status -sb
+  conflicts = status -sb | grep ^UU
+  standup = !"git log --reverse --branches --since=yesterday --author=$(git config --get user.email) --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+  ignored = ls-files --others -i --exclude-standard
+  ready = rebase -i @{u}
+  cleanup = "!git branch --merged | grep -v '^* master$' | grep -v '^  master$' | xargs git branch -d"
+  cleanup-remotes = fetch --prune
+  change = codereview change
+  gofmt = codereview gofmt
+  mail = codereview mail
+  pending = codereview pending
+  submit = codereview submit
+  sync = codereview sync
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[http]
+	cookiefile = /Users/ryanseys/.gitcookies

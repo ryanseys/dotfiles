@@ -1,0 +1,3 @@
+alias git=hub
+alias htdocs="cd /Applications/MAMP/htdocs"
+alias please="sudo"
