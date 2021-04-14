@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # Path to your oh-my-zsh installation.
-export ZSH="~/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 source ~/.aliases
 
@@ -13,3 +13,6 @@ plugins=(git history-substring-search zsh-autosuggestions zsh-completions ruby z
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=7'
 
 source $ZSH/oh-my-zsh.sh
+
+# Reload completions
+autoload -U compinit && compinit
