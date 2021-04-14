@@ -1,43 +1,51 @@
+[alias]
+  squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f" # 'git squash N' squashes N commits
+  lg = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --no-merges
+  st = status -sb
+  cm = commit -m
+  aa = add --all
+  co = checkout
+  cp = cherry-pick
+  master = checkout master
+  new = checkout -b
+  amend = commit --amend --no-edit
+  branches = branch -l
+  undo = reset --soft HEAD~1
+  cleanup = clean -df
+  pushf = push --force-with-lease
+  diffc = diff --cached
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+[branch]
+  autosetuprebase = always
+[push]
+	default = current
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 [user]
 	name = Ryan Seys
-	email = ryan@ryanseys.com
+	email = ryan.seys@shopify.com
 [core]
-	excludesfile = ~/.gitignore_global
 	editor = vim
-[push]
-	default = simple
-[color]
-	diff = always
-	ui = true
-[color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red
-  new = green
-[color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
+	commitGraph = true
+	excludesfile = ~/.gitignore_global
 [diff]
 	algorithm = patience
-[alias]
-  lg = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-  st = status -sb
-  conflicts = status -sb | grep ^UU
-  standup = !"git log --reverse --branches --since=yesterday --author=$(git config --get user.email) --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
-  ignored = ls-files --others -i --exclude-standard
-  ready = rebase -i @{u}
-  cleanup = "!git branch --merged | grep -v '^* master$' | grep -v '^  master$' | xargs git branch -d"
-  cleanup-remotes = fetch --prune
-  change = codereview change
-  gofmt = codereview gofmt
-  mail = codereview mail
-  pending = codereview pending
-  submit = codereview submit
-  sync = codereview sync
-[filter "media"]
-	required = true
-	clean = git media clean %f
-	smudge = git media smudge %f
-[http]
-	cookiefile = /Users/ryanseys/.gitcookies
+[gc]
+	writeCommitGraph = true
+[protocol]
+	version = 2
+[pull]
+	rebase = true
+[init]
+	defaultBranch = master
+[remote "origin"]
+	prune = true
+[rebase]
+	autoStash = true
+	autosquash = true

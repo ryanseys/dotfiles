@@ -1,3 +1,11 @@
-alias git=hub
-alias htdocs="cd /Applications/MAMP/htdocs"
+#!/bin/zsh
+
 alias please="sudo"
+alias aliases="vim ~/.aliases"
+alias pull="git pull"
+alias rt="ruby -Itest"
+alias zshrc="vim ~/.zshrc"
+alias resource="source ~/.zshrc"
+alias gitconfig="vim ~/.gitconfig"
+alias gitaliases="vim ~/.gitconfig"
+alias be="bundle exec"

@@ -10,8 +10,7 @@ dotfiles are configuration files from me for me (and you)
 ## Usage
 
 ```sh
-# Update the symlinks on the machine
-rcup -v
+./install.sh
 ```
 
 ## License
