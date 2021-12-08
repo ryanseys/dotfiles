@@ -1,4 +1,5 @@
 [alias]
+  files = diff-tree --no-commit-id --name-only -r # 'git files bd61ad98' to list files in a given commit
   squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f" # 'git squash N' squashes N commits
   lg = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --no-merges
   st = status -sb
@@ -14,6 +15,7 @@
   cleanup = clean -df
   pushf = push --force-with-lease
   diffc = diff --cached
+	amend-to = "!f() { SHA=`git rev-parse \"$1\"`; git stash -k && git commit --fixup \"$SHA\" && GIT_SEQUENCE_EDITOR=true git rebase --interactive --autosquash \"$SHA^\" && git stash pop; }; f"
 [color]
   diff = auto
   status = auto
