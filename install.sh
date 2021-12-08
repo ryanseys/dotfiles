@@ -16,3 +16,6 @@ cp gitignore_global ~/.gitignore_global
 cp vimrc ~/.vimrc
 cp gitconfig ~/.gitconfig
 cp zshrc ~/.zshrc
+
+# Copy zsh theme into right place.
+cp ryanseys.zsh-theme ~/.oh-my-zsh/themes/
