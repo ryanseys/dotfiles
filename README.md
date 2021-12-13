@@ -4,13 +4,10 @@ dotfiles are configuration files from me for me (and you)
 
 ## Install
 
-1. Clone this repo to `~/.dotfiles`
-2. Install [`rcm`](http://thoughtbot.github.io/rcm/).
-
-## Usage
-
 ```sh
-./install.sh
+$ git clone git@github.com:ryanseys/dotfiles.git ~/.dotfiles
+$ cd ~/.dotfiles
+$ ./install.sh
 ```
 
 ## License
