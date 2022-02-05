@@ -1,5 +1,18 @@
 #!/bin/zsh
 
+function spinx() {
+  SPIN_URL=`spin show -o fqdn`
+  ssh spin@${SPIN_URL} -t 'tmux -CC new -A -s tmssh'
+}
+
+alias gitclean='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
+alias web="dev cd web"
+alias core="dev cd shopify"
+alias business="dev cd business-platform"
+alias shopify="dev cd shopify"
+alias identity="dev cd identity"
+alias bank="dev cd banking"
+alias banking="dev cd banking"
 alias please="sudo"
 alias aliases="vim ~/.aliases"
 alias pull="git pull"

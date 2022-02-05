@@ -5,7 +5,7 @@ if [[ -v SPIN ]]; then
   # Source zsh config in Spin if it exists
   [[ -f /etc/zsh/zshrc.default.inc.zsh ]] && source /etc/zsh/zshrc.default.inc.zsh
 else
-  export DISABLE_SPRING=1
+  #export DISABLE_SPRING=1
 fi
 
 # Path to your oh-my-zsh installation.
