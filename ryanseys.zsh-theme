@@ -1,8 +1,8 @@
 if [ -z "$SPIN" ]
 then
-  RYANSEYS_ENV_CHAR="⌘"
+  RYANSEYS_ENV_CHAR="⌘ "
 else
-  RYANSEYS_ENV_CHAR="꩜"
+  RYANSEYS_ENV_CHAR="꩜ "
 fi
 
 PROMPT="%(?:%{$fg_bold[green]%}${RYANSEYS_ENV_CHAR} :%{$fg_bold[red]%}${RYANSEYS_ENV_CHAR} )"
