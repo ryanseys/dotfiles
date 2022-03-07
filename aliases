@@ -5,6 +5,13 @@ function spinx() {
   ssh spin@${SPIN_URL} -t 'tmux -CC new -A -s tmssh'
 }
 
+# spin specific aliases
+if [[ -v SPIN ]]; then
+  alias fqdn="cat /etc/spin/machine/fqdn"
+else
+
+fi
+
 alias gitclean='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
 alias web="dev cd web"
 alias core="dev cd shopify"
