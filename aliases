@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-function spinx() {
+function ss() {
   SPIN_URL=`spin show -o fqdn`
   ssh spin@${SPIN_URL} -t 'tmux -CC new -A -s tmssh'
 }
