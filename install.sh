@@ -5,9 +5,9 @@ if [ -z "${ZSH}" ]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-if [ -n "${SPIN}" ]; then
-  ./install_rubymine_on_spin.sh
-fi
+# if [ -n "${SPIN}" ]; then
+#   ./install_rubymine_on_spin.sh
+# fi
 
 # Install plugins
 if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-completions" ] ; then
