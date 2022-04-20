@@ -1,4 +1,5 @@
 [alias]
+  track = "!git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`" # git track will set the upstream to origin/<branch name>
   pow = "!fn() { git add --all && git commit --amend --no-edit && git push --force-with-lease; }; fn" # amend and pushf
   fixup = "!fn() { git commit --fixup ${1} && GIT_EDITOR=true git rebase --autosquash -i ${1}^; }; fn" # 'git fixup <commit id>' commits staged changes to a given commit
   files = diff-tree --no-commit-id --name-only -r # 'git files bd61ad98' to list files in a given commit
