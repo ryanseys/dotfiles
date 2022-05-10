@@ -38,4 +38,7 @@ cp gitmessage ~/.gitmessage
 # Copy zsh theme into right place.
 cp ryanseys.zsh-theme ~/.oh-my-zsh/themes/
 
+# TODO: install precommit hooks for all repositories
+
+
 echo "Done installing dotfiles!"
