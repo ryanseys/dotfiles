@@ -10,3 +10,4 @@ cp ~/.zshrc zshrc
 
 # Copy zsh theme into right place.
 cp ~/.oh-my-zsh/themes/ryanseys.zsh-theme ryanseys.zsh-theme
+cp ~/.gitmessage gitmessage

@@ -14,6 +14,7 @@ export ZSH="$HOME/.oh-my-zsh"
 source ~/.aliases
 
 ZSH_THEME="ryanseys"
+EDITOR="vim"
 
 DISABLE_UPDATE_PROMPT="true"
 

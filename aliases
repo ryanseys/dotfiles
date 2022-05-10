@@ -12,6 +12,7 @@ else
 
 fi
 
+alias new-maintenance-task='bin/rails generate maintenance_tasks:task'
 alias gitclean='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
 alias web="dev cd web"
 alias core="dev cd shopify"

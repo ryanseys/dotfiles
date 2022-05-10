@@ -56,3 +56,4 @@
 	program = /opt/homebrew/bin/gpg
 [commit]
 	gpgsign = false
+	template = /Users/ryanseys/.gitmessage
