@@ -39,6 +39,10 @@ cp gitmessage ~/.gitmessage
 cp ryanseys.zsh-theme ~/.oh-my-zsh/themes/
 
 # TODO: install precommit hooks for all repositories
-
+if [ -d "/home/spin/src/github.com/Shopify/ryanseys-test" ]; then
+  mkdir /home/spin/src/github.com/Shopify/ryanseys-test/.git/hooks/precommit.d
+  cp hooks/precommit /home/spin/src/github.com/Shopify/ryanseys-test/.git/hooks/
+  cp -a hooks/precommit.d/ /home/spin/src/github.com/Shopify/ryanseys-test/.git/hooks/precommit.d/
+fi
 
 echo "Done installing dotfiles!"
