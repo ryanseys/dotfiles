@@ -38,14 +38,35 @@ cp gitmessage ~/.gitmessage
 # Copy zsh theme into right place.
 cp ryanseys.zsh-theme ~/.oh-my-zsh/themes/
 
-# Install pre-commit hooks for all repositories
+# Install pre-commit hooks for all repositories in Spin
 if [ -d "/home/spin/src/github.com/Shopify/" ]; then
+  echo "Installing pre-commit hooks for Spin repositories"
   for f in /home/spin/src/github.com/Shopify/*; do
     if [ -d "$f" ]; then
       # Runs for every directory in this directory...
 
-      cp hooks/pre-commit $f/.git/hooks/
-      cp -a hooks/pre-commit.d/ $f/.git/hooks/
+      cp -fp hooks/pre-commit $f/.git/hooks/
+
+      for hook in ./hooks/pre-commit.d/*; do
+        # -p preserves the file permissions
+        cp -fp $hook $f/.git/hooks/pre-commit.d/
+      done
+    fi
+  done
+fi
+
+# Install pre-commit hooks for all repositories locally
+if [ -d "/Users/ryanseys/src/github.com/Shopify/" ]; then
+  echo "Installing pre-commit hooks for local repositories"
+  for f in /Users/ryanseys/src/github.com/Shopify/*; do
+    if [ -d "$f" ]; then
+      # Runs for every directory in this directory...
+      cp -fp hooks/pre-commit $f/.git/hooks/
+
+      for hook in ./hooks/pre-commit.d/*; do
+        # -p preserves the file permissions
+        cp -fp $hook $f/.git/hooks/pre-commit.d/
+      done
     fi
   done
 fi

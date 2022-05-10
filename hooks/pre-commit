@@ -3,7 +3,7 @@
 cd "$(dirname "$0")/pre-commit.d" || exit
 
 for hook in *; do
-    bash "$hook"
+    "./$hook"
     RESULT=$?
     if [ $RESULT != 0 ]; then
         echo "pre-commit.d/$hook returned non-zero: $RESULT, abort commit"
