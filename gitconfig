@@ -5,6 +5,7 @@
   files = diff-tree --no-commit-id --name-only -r # 'git files bd61ad98' to list files in a given commit
   squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f" # 'git squash N' squashes N commits
   lg = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --no-merges
+  file-history = log --all --full-history --summary --no-merges --full-diff -- # 'git file-history path/to/file.rb' to find all commits on a particular file
   st = status -sb
   cm = commit -m
   aa = add --all

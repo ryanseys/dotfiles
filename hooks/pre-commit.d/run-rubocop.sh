@@ -1,3 +1,3 @@
 #!/bin/sh
 
-bundle exec rubocop
+shadowenv exec -- bundle exec rubocop
