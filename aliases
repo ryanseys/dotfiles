@@ -5,18 +5,29 @@ function ss() {
   ssh spin@${SPIN_URL} -t 'tmux -CC new -A -s tmssh'
 }
 
+# gpr = git pull & rebase.
+# checkouts the default branch, pulls it from origin, switches back to existing branch, and rebases
+function gpr() {
+  export DEFAULT_BRANCH=`git rev-parse --abbrev-ref origin/HEAD | sed 's/origin\///g'`
+  git checkout $DEFAULT_BRANCH
+  git pull
+
+  git checkout -
+  git rebase $DEFAULT_BRANCH
+}
+
 # fixup lets you choose a commit to fix up and it automatically applies the 
 # stages changes in git as a fixup commit and applies it by rebasing off 
 # the main / master branch automatically
 # Usage: fixup
 function fixup() {
-  STAGED_CHANGES=`git diff --name-only --cached`
+  export STAGED_CHANGES=`git diff --name-only --cached`
   [[ -z $STAGED_CHANGES ]] && echo "No staged changes to fixup. Exiting..." && exit
 
-  COMMIT_SHA=`git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7`
+  export COMMIT_SHA=`git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7`
   git commit --fixup $COMMIT_SHA
 
-  DEFAULT_BRANCH=`git rev-parse --abbrev-ref origin/HEAD | sed 's/origin\///g'`
+  export DEFAULT_BRANCH=`git rev-parse --abbrev-ref origin/HEAD | sed 's/origin\///g'`
   GIT_SEQUENCE_EDITOR=true git rebase -i --autosquash $DEFAULT_BRANCH
 }
 
