@@ -1,13 +1,33 @@
 [alias]
+  # `git back` to switch back to previous branch
+  back = checkout -
+  # `git rmbr my-branch` deletes the branch named my-branch.
+  rmbr = branch -D
+  # `git now-many 5` amends the last 5 commits with the current time.
+  now-many = rebase HEAD~${1} --exec "git commit --amend --no-edit --date 'now'"
+  # `git now` amends the current commit with the current time.
+  now = commit --amend --reset-author --no-edit
+  # `git open` opens the current branch in github
+  open = !zsh -c 'source $HOME/.aliases && git-open'
+  # `git pick` lets you choose files to add
+  pick = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add"
+  # `git tree` will print a pretty tree of commits of the current branch
   tree = "log --all --decorate --oneline --graph"
-  track = "!git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`" # git track will set the upstream to origin/<branch name>
-  pow = "!fn() { git add --all && git commit --amend --no-edit && git push --force-with-lease; }; fn" # amend and pushf
-  fixup = "!zsh -c 'source $HOME/.aliases && fixup'"
-  fixup-choose = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
-  files = diff-tree --no-commit-id --name-only -r # 'git files bd61ad98' to list files in a given commit
-  squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f" # 'git squash N' squashes N commits
+  # `git track` will set the upstream to origin/<branch name>
+  track = "!git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`"
+  # `git pow` to amend staged changes and pushf
+  pow = "!fn() { git add --all && git commit --amend --no-edit && git push --force-with-lease; }; fn"
+  # `git fixup-pick` to pick a commit to fixup
+  fixup-pick = "!git log -n 10 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
+  # `git fixup-done <branch this branch is based on>` to finish fixup
+  fixup-done = "!git rebase -i --autosquash"
+  # `git files bd61ad98` to list files in a given commit
+  files = diff-tree --no-commit-id --name-only -r
+  # `git squash N` squashes N commits
+  squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
   lg = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --no-merges
-  file-history = log --all --full-history --summary --no-merges --full-diff -- # 'git file-history path/to/file.rb' to find all commits on a particular file
+  # `git file-history path/to/file.rb` to find all commits on a particular file
+  file-history = log --all --full-history --summary --no-merges --full-diff --
   st = status -sb
   cm = commit -m
   aa = add --all
@@ -22,6 +42,7 @@
   cleanup = clean -df
   pushf = push --force-with-lease
   diffc = diff --cached
+  # `git amend-to <SHA>` to amend staged changes to a particular commit
 	amend-to = "!f() { SHA=`git rev-parse \"$1\"`; git stash -k && git commit --fixup \"$SHA\" && GIT_SEQUENCE_EDITOR=true git rebase --interactive --autosquash \"$SHA^\" && git stash pop; }; f"
 [color]
   diff = auto
@@ -41,7 +62,7 @@
 	email = ryan.seys@shopify.com
 [core]
 	editor = vim
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/ryanseys/.gitignore_global
 [pull]
 	rebase = true
 [init]
@@ -60,3 +81,9 @@
 [commit]
 	gpgsign = false
 	template = /Users/ryanseys/.gitmessage
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

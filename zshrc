@@ -5,7 +5,14 @@ if [[ -v SPIN ]]; then
   # Source zsh config in Spin if it exists
   [[ -f /etc/zsh/zshrc.default.inc.zsh ]] && source /etc/zsh/zshrc.default.inc.zsh
 else
-  #export DISABLE_SPRING=1
+  # In local machine
+fi
+
+# Set editor and visual if code command exists.
+if command -v code &> /dev/null; then
+  export {EDITOR,VISUAL}="code"
+else
+  export {EDITOR,VISUAL}="vim"
 fi
 
 # Path to your oh-my-zsh installation.
@@ -14,7 +21,6 @@ export ZSH="$HOME/.oh-my-zsh"
 source ~/.aliases
 
 ZSH_THEME="ryanseys"
-EDITOR="vim"
 
 DISABLE_UPDATE_PROMPT="true"
 
@@ -32,3 +38,6 @@ source $ZSH/oh-my-zsh.sh
 [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
 
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
+
+# git fuzzy - https://github.com/bigH/git-fuzzy
+[ -d "/Users/ryanseys/code/git-fuzzy/bin" ] && export PATH="/Users/ryanseys/code/git-fuzzy/bin:$PATH"

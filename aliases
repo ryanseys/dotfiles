@@ -1,5 +1,16 @@
 #!/bin/zsh
 
+# git-open to open the current branch in github
+function git-open() {
+  CURRENT_BRANCH=$(git branch --show-current)
+  REMOTE_BRANCH=$(git config --get branch.$CURRENT_BRANCH.remote)
+  MERGE_BRANCH=$(git config --get branch.$CURRENT_BRANCH.merge | cut -d '/' -f 3-)
+  GIT_REMOTE_URL=$(git ls-remote --get-url $REMOTE_BRANCH)
+  URL_TO_OPEN=$(echo $GIT_REMOTE_URL | sed 's/.git$//g')
+
+  open "$URL_TO_OPEN/compare/$MERGE_BRANCH?expand=1"
+}
+
 function ss() {
   SPIN_URL=`spin show -o fqdn`
   ssh spin@${SPIN_URL} -t 'tmux -CC new -A -s tmssh'
@@ -16,11 +27,11 @@ function gpr() {
   git rebase $DEFAULT_BRANCH
 }
 
-# fixup lets you choose a commit to fix up and it automatically applies the 
-# stages changes in git as a fixup commit and applies it by rebasing off 
+# fixup lets you choose a commit to fix up and it automatically applies the
+# stages changes in git as a fixup commit and applies it by rebasing off
 # the main / master branch automatically
-# Usage: fixup
-function fixup() {
+# Usage: fixup-main
+function fixup-main() {
   export STAGED_CHANGES=`git diff --name-only --cached`
   [[ -z $STAGED_CHANGES ]] && echo "No staged changes to fixup. Exiting..." && exit
 
@@ -31,6 +42,17 @@ function fixup() {
   GIT_SEQUENCE_EDITOR=true git rebase -i --autosquash $DEFAULT_BRANCH
 }
 
+function killport() {
+  export PROCESSES_ON_PORT=`lsof -ti:$1`
+
+  if [ -z "$PROCESSES_ON_PORT" ]; then
+    echo "No processes on port $1"
+  else
+    echo "Killing processes on port $1"
+    kill -9 $PROCESSES_ON_PORT
+  fi
+}
+
 # spin specific aliases
 if [[ -v SPIN ]]; then
   alias fqdn="cat /etc/spin/machine/fqdn"
@@ -38,6 +60,15 @@ else
 
 fi
 
+alias favme="mysides add $(basename $(pwd)) file://$(pwd)"
+# Add directory to sidebar favorites.
+# Install with `brew install --cask mysides`
+# Usage: `fav code file:///Users/ryanseys/code` to that dir to Mac sidebar.
+alias fav="mysides add"
+alias wip="git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m 'WIP'"
+alias up="dev up"
+alias dsl="bin/tapioca dsl"
+alias style="bin/style --include-branch-commits"
 alias new-maintenance-task='bin/rails generate maintenance_tasks:task'
 alias gitclean='git branch --merged | egrep -v "(^\*|master|main)" | xargs git branch -d'
 alias web="dev cd web"
@@ -48,11 +79,11 @@ alias identity="dev cd identity"
 alias bank="dev cd banking"
 alias banking="dev cd banking"
 alias please="sudo"
-alias aliases="vim ~/.aliases"
+alias aliases="$EDITOR ~/.aliases"
 alias pull="git pull"
 alias rt="ruby -Itest"
-alias zshrc="vim ~/.zshrc"
+alias zshrc="$EDITOR ~/.zshrc"
 alias resource="source ~/.zshrc"
-alias gitconfig="vim ~/.gitconfig"
-alias gitaliases="vim ~/.gitconfig"
+alias gitconfig="$EDITOR ~/.gitconfig"
+alias gitaliases="$EDITOR ~/.gitconfig"
 alias be="bundle exec"
