@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+# Spin related configs
+if [[ -v SPIN ]]; then
+  # Source zsh config in Spin if it exists
+  [[ -f /etc/zsh/zshrc.default.inc.zsh ]] && source /etc/zsh/zshrc.default.inc.zsh
+else
+  # In local machine
+fi
+
+# dev tool
+[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
+
+source .aliases

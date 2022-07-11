@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# Source local aliases
+[ -f ~/.aliases_local ] && source ~/.aliases_local
+
 # git-open to open the current branch in github
 function git-open() {
   CURRENT_BRANCH=$(git branch --show-current)
@@ -9,11 +12,6 @@ function git-open() {
   URL_TO_OPEN=$(echo $GIT_REMOTE_URL | sed 's/.git$//g')
 
   open "$URL_TO_OPEN/compare/$MERGE_BRANCH?expand=1"
-}
-
-function ss() {
-  SPIN_URL=`spin show -o fqdn`
-  ssh spin@${SPIN_URL} -t 'tmux -CC new -A -s tmssh'
 }
 
 # gpr = git pull & rebase.
@@ -53,13 +51,6 @@ function killport() {
   fi
 }
 
-# spin specific aliases
-if [[ -v SPIN ]]; then
-  alias fqdn="cat /etc/spin/machine/fqdn"
-else
-
-fi
-
 alias favme="mysides add $(basename $(pwd)) file://$(pwd)"
 # Add directory to sidebar favorites.
 # Install with `brew install --cask mysides`
@@ -69,15 +60,7 @@ alias wip="git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit
 alias up="dev up"
 alias dsl="bin/tapioca dsl"
 alias style="bin/style --include-branch-commits"
-alias new-maintenance-task='bin/rails generate maintenance_tasks:task'
 alias gitclean='git branch --merged | egrep -v "(^\*|master|main)" | xargs git branch -d'
-alias web="dev cd web"
-alias core="dev cd shopify"
-alias business="dev cd business-platform"
-alias shopify="dev cd shopify"
-alias identity="dev cd identity"
-alias bank="dev cd banking"
-alias banking="dev cd banking"
 alias please="sudo"
 alias aliases="$EDITOR ~/.aliases"
 alias pull="git pull"

@@ -1,0 +1,5 @@
+[user]
+	name = Ryan Seys
+	email = ryan.seys@shopify.com
+[include]
+	path = /Users/ryanseys/.config/dev/gitconfig

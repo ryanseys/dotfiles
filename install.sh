@@ -5,10 +5,6 @@ if [ -z "${ZSH}" ]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-# if [ -n "${SPIN}" ]; then
-#   ./install_rubymine_on_spin.sh
-# fi
-
 # Install plugins
 if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-completions" ] ; then
   git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-completions
@@ -33,42 +29,26 @@ cp gitignore_global ~/.gitignore_global
 cp vimrc ~/.vimrc
 cp gitconfig ~/.gitconfig
 cp zshrc ~/.zshrc
-cp gitmessage ~/.gitmessage
 
 # Copy zsh theme into right place.
 cp ryanseys.zsh-theme ~/.oh-my-zsh/themes/
 
-# Install pre-commit hooks for all repositories in Spin
-if [ -d "/home/spin/src/github.com/Shopify/" ]; then
-  echo "Installing pre-commit hooks for Spin repositories"
-  for f in /home/spin/src/github.com/Shopify/*; do
-    if [ -d "$f" ]; then
-      # Runs for every directory in this directory...
+HOSTNAME=`hostname`
 
-      cp -fp hooks/pre-commit $f/.git/hooks/
-
-      for hook in ./hooks/pre-commit.d/*; do
-        # -p preserves the file permissions
-        cp -fp $hook $f/.git/hooks/pre-commit.d/
-      done
-    fi
-  done
-fi
-
-# Install pre-commit hooks for all repositories locally
-if [ -d "/Users/ryanseys/src/github.com/Shopify/" ]; then
-  echo "Installing pre-commit hooks for local repositories"
-  for f in /Users/ryanseys/src/github.com/Shopify/*; do
-    if [ -d "$f" ]; then
-      # Runs for every directory in this directory...
-      cp -fp hooks/pre-commit $f/.git/hooks/
-
-      for hook in ./hooks/pre-commit.d/*; do
-        # -p preserves the file permissions
-        cp -fp $hook $f/.git/hooks/pre-commit.d/
-      done
-    fi
-  done
+if [[ "$HOSTNAME" = "ryan-personal-macbook" ]]; then
+  # Install Ryan's personal machine
+  cp ./personal/ruby-version ~/.ruby-version
+  cp ./personal/gitconfig ~/.gitconfig_local
+  cp ./personal/aliases ~/.aliases_local
+elif [[ "$HOSTNAME" = "spin" ]]; then
+  # Install Spin configs
+  cp ./shopify/gitconfig ~/.gitconfig_local
+  cp ./shopify/install_rubymine_on_spin.sh ~/install_rubymine_on_spin.sh
+  cp ./shopify/aliases ~/.aliases_local
+else # TODO: Figure out hostname for Shopify Macbook
+  cp ./shopify/gitconfig ~/.gitconfig_local
+  cp ./shopify/aliases ~/.aliases_local
+  cp ./shopify/gitmessage ~/.gitmessage
 fi
 
 echo "Done installing dotfiles!"

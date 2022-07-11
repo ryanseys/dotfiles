@@ -58,8 +58,7 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 [user]
-	name = Ryan Seys
-	email = ryan.seys@shopify.com
+  # These are set in .gitconfig_local
 [core]
 	editor = vim
 	excludesfile = /Users/ryanseys/.gitignore_global
@@ -75,15 +74,9 @@
 [fetch]
 	prune = true
 [include]
-	path = /Users/ryanseys/.config/dev/gitconfig
+  path = ~/.gitconfig_local
 [gpg]
 	program = /opt/homebrew/bin/gpg
 [commit]
 	gpgsign = false
 	template = /Users/ryanseys/.gitmessage
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true

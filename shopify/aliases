@@ -1,0 +1,20 @@
+#!/bin/zsh
+
+function ss() {
+  SPIN_URL=`spin show -o fqdn`
+  ssh spin@${SPIN_URL} -t 'tmux -CC new -A -s tmssh'
+}
+
+# If you're in Spin
+if [[ -v SPIN ]]; then
+  alias fqdn="cat /etc/spin/machine/fqdn"
+fi
+
+alias web="dev cd web"
+alias core="dev cd shopify"
+alias business="dev cd business-platform"
+alias shopify="dev cd shopify"
+alias identity="dev cd identity"
+alias bank="dev cd banking"
+alias banking="dev cd banking"
+alias new-maintenance-task='bin/rails generate maintenance_tasks:task'
