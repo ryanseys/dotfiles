@@ -1,8 +1,5 @@
 #!/bin/zsh
 
-# Source local aliases
-[ -f ~/.aliases_local ] && source ~/.aliases_local
-
 # git-open to open the current branch in github
 function git-open() {
   CURRENT_BRANCH=$(git branch --show-current)
@@ -56,7 +53,6 @@ alias favme="mysides add $(basename $(pwd)) file://$(pwd)"
 # Install with `brew install --cask mysides`
 # Usage: `fav code file:///Users/ryanseys/code` to that dir to Mac sidebar.
 alias fav="mysides add"
-alias wip="git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m 'WIP'"
 alias up="dev up"
 alias dsl="bin/tapioca dsl"
 alias style="bin/style --include-branch-commits"
