@@ -10,10 +10,7 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-source ~/.aliases
-
 ZSH_THEME="ryanseys"
-
 DISABLE_UPDATE_PROMPT="true"
 
 plugins=(git history-substring-search zsh-autosuggestions zsh-completions ruby zsh-syntax-highlighting)
@@ -29,3 +26,7 @@ source $ZSH/oh-my-zsh.sh
 
 # git fuzzy - https://github.com/bigH/git-fuzzy
 [ -d "/Users/ryanseys/code/git-fuzzy/bin" ] && export PATH="/Users/ryanseys/code/git-fuzzy/bin:$PATH"
+
+source ~/.aliases
+source ~/.aliases_local
+source ~/.zshrc_local

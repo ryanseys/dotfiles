@@ -40,15 +40,18 @@ if [[ "$HOSTNAME" = "ryan-personal-macbook" ]]; then
   cp ./personal/ruby-version ~/.ruby-version
   cp ./personal/gitconfig ~/.gitconfig_local
   cp ./personal/aliases ~/.aliases_local
+  cp ./personal/zshrc ~/.zshrc_local
 elif [[ "$HOSTNAME" = "spin" ]]; then
   # Install Spin configs
   cp ./shopify/gitconfig ~/.gitconfig_local
   cp ./shopify/install_rubymine_on_spin.sh ~/install_rubymine_on_spin.sh
   cp ./shopify/aliases ~/.aliases_local
+  cp ./shopify/zshrc ~/.zshrc_local
 else # TODO: Figure out hostname for Shopify Macbook
   cp ./shopify/gitconfig ~/.gitconfig_local
   cp ./shopify/aliases ~/.aliases_local
   cp ./shopify/gitmessage ~/.gitmessage
+  cp ./shopify/zshrc ~/.zshrc_local
 fi
 
 echo "Done installing dotfiles!"

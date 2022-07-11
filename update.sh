@@ -17,13 +17,16 @@ if [[ "$HOSTNAME" = "ryan-personal-macbook" ]]; then
   cp ~/.gitconfig_local ./personal/gitconfig
   cp ~/.aliases_local ./personal/aliases
   cp ~/.ruby-version ./personal/ruby-version
+  cp ~/.zshrc_local ./personal/zshrc
 elif [[ "$HOSTNAME" == "spin" ]]; then
   # Install Spin configs
   cp ~/.gitconfig_local ./shopify/gitconfig
   cp ~/install_rubymine_on_spin.sh ./shopify/install_rubymine_on_spin.sh
   cp ~/.aliases_local ./shopify/aliases
+  cp ~/.zshrc_local ./shopify/zshrc
 else # TODO: Figure out hostname for Shopify Macbook
   cp ~/.gitconfig_local ./shopify/gitconfig
   cp ~/.aliases_local ./shopify/aliases
   cp ~/.gitmessage ./shopify/gitmessage
+  cp ~/.zshrc_local ./shopify/zshrc
 fi
