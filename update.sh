@@ -24,9 +24,11 @@ elif [[ "$HOSTNAME" == "spin" ]]; then
   cp ~/install_rubymine_on_spin.sh ./shopify/install_rubymine_on_spin.sh
   cp ~/.aliases_local ./shopify/aliases
   cp ~/.zshrc_local ./shopify/zshrc
-else # TODO: Figure out hostname for Shopify Macbook
+elif [[ -d "/Users/ryanseys/src/github.com/Shopify/banking" ]]; then
   cp ~/.gitconfig_local ./shopify/gitconfig
   cp ~/.aliases_local ./shopify/aliases
   cp ~/.gitmessage ./shopify/gitmessage
   cp ~/.zshrc_local ./shopify/zshrc
+else
+  echo "Not sure what machine you are on."
 fi

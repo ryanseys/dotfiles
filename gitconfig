@@ -62,6 +62,8 @@
 [core]
 	editor = vim
 	excludesfile = /Users/ryanseys/.gitignore_global
+  fsmonitor = true # monitor file system for changes https://github.blog/2022-06-29-improve-git-monorepo-performance-with-a-file-system-monitor/
+  untrackedCache = true # cache untracked files in memory to speed up git status https://github.blog/2022-06-29-improve-git-monorepo-performance-with-a-file-system-monitor/
 [pull]
 	rebase = true
 [init]
