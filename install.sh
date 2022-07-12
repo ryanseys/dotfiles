@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+echo "Installing common dotfiles..."
+
 # Install Oh My Zsh
 if [ -z "${ZSH}" ]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -36,22 +38,27 @@ cp ryanseys.zsh-theme ~/.oh-my-zsh/themes/
 HOSTNAME=`hostname`
 
 if [[ "$HOSTNAME" = "ryan-personal-macbook" ]]; then
+  echo "Installing dotfiles for Personal Macbook..."
   # Install Ryan's personal machine
   cp ./personal/ruby-version ~/.ruby-version
   cp ./personal/gitconfig ~/.gitconfig_local
   cp ./personal/aliases ~/.aliases_local
   cp ./personal/zshrc ~/.zshrc_local
 elif [[ "$HOSTNAME" = "spin" ]]; then
+  echo "Installing dotfiles for Spin..."
   # Install Spin configs
   cp ./shopify/gitconfig ~/.gitconfig_local
   cp ./shopify/install_rubymine_on_spin.sh ~/install_rubymine_on_spin.sh
   cp ./shopify/aliases ~/.aliases_local
   cp ./shopify/zshrc ~/.zshrc_local
-else # TODO: Figure out hostname for Shopify Macbook
+elif [[ -d "/Users/ryanseys/src/github.com/Shopify/banking" ]]; then
+  echo "Installing dotfiles for Shopify Macbook..."
   cp ./shopify/gitconfig ~/.gitconfig_local
   cp ./shopify/aliases ~/.aliases_local
   cp ./shopify/gitmessage ~/.gitmessage
   cp ./shopify/zshrc ~/.zshrc_local
+else
+  echo "Not sure what machine you are on."
 fi
 
 echo "Done installing dotfiles!"
