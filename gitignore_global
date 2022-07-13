@@ -4,6 +4,7 @@ node_modules
 *.db
 *.log
 .Rhistory
+.idea
 
 # CTags
 tags
