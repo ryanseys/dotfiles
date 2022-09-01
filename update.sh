@@ -2,13 +2,15 @@
 
 echo "Updating common dotfiles..."
 
-# Copy dotfiles into their places
+# Copy common dotfiles into their places
 cp ~/.aliases aliases
 cp ~/.hushlogin hushlogin
 cp ~/.gitignore_global gitignore_global
 cp ~/.vimrc vimrc
 cp ~/.gitconfig gitconfig
 cp ~/.zshrc zshrc
+cp ~/.pryrc pryrc
+cp ~/.ruby-version ruby-version
 
 # Copy zsh theme into right place.
 cp ~/.oh-my-zsh/themes/ryanseys.zsh-theme ryanseys.zsh-theme
@@ -37,3 +39,5 @@ elif [[ -d "/Users/ryanseys/src/github.com/Shopify/banking" ]]; then
 else
   echo "Not sure what machine you are on."
 fi
+
+echo "Done updating dotfiles!"
