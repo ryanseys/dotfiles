@@ -59,6 +59,8 @@ end
 
 def personal_dotfiles
   @personal_dotfiles ||= if on_personal_computer?
+    puts "Detected: Personal Macbook 🤪"
+
     [
       Dotfile.new(from: "#{home_dir}/.gitconfig_local", to: "personal/gitconfig"),
       Dotfile.new(from: "#{home_dir}/.aliases_local", to: "personal/aliases"),
@@ -70,6 +72,8 @@ end
 
 def spin_dotfiles
   @spin_dotfiles ||= if on_spin?
+    puts "Detected: Spin 🌀"
+
     [
       Dotfile.new(from: "#{home_dir}/.gitconfig_local", to: "shopify/gitconfig"),
       Dotfile.new(from: "#{home_dir}/install_rubymine_on_spin.sh", to: "shopify/install_rubymine_on_spin.sh"),
@@ -81,6 +85,8 @@ end
 
 def shopify_dotfiles
   @shopify_dotfiles ||= if on_shopify_computer?
+    puts "Detected: Shopify Macbook 👨🏼‍💻"
+
     [
       Dotfile.new(from: "#{home_dir}/.gitconfig_local", to: "shopify/gitconfig"),
       Dotfile.new(from: "#{home_dir}/.aliases_local", to: "shopify/aliases"),
@@ -100,6 +106,8 @@ def install_dotfiles
   dotfiles.each do |dotfile|
     dotfile.install
   end
+
+  puts "Done installing dotfiles!\n"
 end
 
 def update_dotfiles
@@ -108,6 +116,8 @@ def update_dotfiles
   dotfiles.each do |dotfile|
     dotfile.update
   end
+
+  puts "Done updating dotfiles!\n"
 end
 
 def has_oh_my_zsh?
@@ -151,7 +161,7 @@ end
 def update_everything
   update_dotfiles
 
-  puts "Done updating your repo's dotfiles!"
+  puts "Done updating everything!"
 end
 
 def run_it!
