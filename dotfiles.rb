@@ -11,27 +11,44 @@ class Dotfile
   end
 
   def sync_to_repo
-    if File.exist?(local_path)
-      copy_file(local_path, repo_path)
-    else
-      puts "File #{local_path} does not exist. Skipping..."
-    end
-  end
+    return puts "File #{local_path} does not exist. Skipping sync..." unless File.exist?(local_path)
 
-  def install
-    if FileUtils.uptodate?(local_path, [repo_path])
-      puts "File #{local_path} looks newer than the repo's file. Maybe try running ./dotfiles.rb update first?"
+    local_file_mtime = File.mtime(local_path)
+    repo_file_mtime = File.mtime(repo_path)
+
+    local_older = local_file_mtime < repo_file_mtime
+
+    same_content = FileUtils.compare_file(local_path, repo_path)
+
+    if local_older && !same_content
+      puts "Local file looks older than repo and has different contents so its likely out of date. Skipping..."
       return
     end
 
-    copy_file(repo_path, local_path)
+    copy_file(local_path, repo_path, preserve_mtime: true)
+  end
+
+  def install
+    local_file_mtime = File.mtime(local_path)
+    repo_file_mtime = File.mtime(repo_path)
+
+    local_newer = local_file_mtime > repo_file_mtime
+    same_content = FileUtils.compare_file(local_path, repo_path)
+
+    if local_newer && !same_content
+      puts "Local file #{local_path} looks newer than repo file #{repo_path} and has different contents."
+      puts "Run `./dotfiles.rb update` first?"
+      return
+    end
+
+    copy_file(repo_path, local_path, preserve_mtime: true)
   end
 
   private
 
-  def copy_file(from, to)
+  def copy_file(from, to, preserve_mtime: false)
     puts "Copying #{from} to #{to}..."
-    FileUtils.cp(from, to)
+    FileUtils.cp(from, to, preserve: preserve_mtime)
   end
 end
 
