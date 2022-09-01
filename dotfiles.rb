@@ -3,19 +3,28 @@
 require "fileutils"
 
 class Dotfile
-  attr_reader :from, :to
+  attr_reader :local_path, :repo_path
 
-  def initialize(from:, to:)
-    @from = from
-    @to = to
+  def initialize(local_path:, repo_path:)
+    @local_path = local_path
+    @repo_path = repo_path
   end
 
-  def update
-    copy_file(from, to)
+  def sync_to_repo
+    if File.exist?(local_path)
+      copy_file(local_path, repo_path)
+    else
+      puts "File #{local_path} does not exist. Skipping..."
+    end
   end
 
   def install
-    copy_file(to, from)
+    if FileUtils.uptodate?(local_path, [repo_path])
+      puts "File #{local_path} looks newer than the repo's file. Maybe try running ./dotfiles.rb update first?"
+      return
+    end
+
+    copy_file(repo_path, local_path)
   end
 
   private
@@ -44,17 +53,17 @@ end
 
 def common_dotfiles
   @common_dotfiles ||= [
-    Dotfile.new(from: "#{home_dir}/.aliases", to: "common/aliases"),
-    Dotfile.new(from: "#{home_dir}/.hushlogin", to: "common/hushlogin"),
-    Dotfile.new(from: "#{home_dir}/.gitignore_global", to: "common/gitignore_global"),
-    Dotfile.new(from: "#{home_dir}/.vimrc", to: "common/vimrc"),
-    Dotfile.new(from: "#{home_dir}/.gitconfig", to: "common/gitconfig"),
-    Dotfile.new(from: "#{home_dir}/.zshrc", to: "common/zshrc"),
-    Dotfile.new(from: "#{home_dir}/.pryrc", to: "common/pryrc"),
-    Dotfile.new(from: "#{home_dir}/.irbrc", to: "common/irbrc"),
-    Dotfile.new(from: "#{home_dir}/.aprc", to: "common/aprc"),
-    Dotfile.new(from: "#{home_dir}/.ruby-version", to: "common/ruby-version"),
-    Dotfile.new(from: "#{home_dir}/.oh-my-zsh/themes/ryanseys.zsh-theme", to: "common/ryanseys.zsh-theme"),
+    Dotfile.new(local_path: "#{home_dir}/.aliases", repo_path: "common/aliases"),
+    Dotfile.new(local_path: "#{home_dir}/.hushlogin", repo_path: "common/hushlogin"),
+    Dotfile.new(local_path: "#{home_dir}/.gitignore_global", repo_path: "common/gitignore_global"),
+    Dotfile.new(local_path: "#{home_dir}/.vimrc", repo_path: "common/vimrc"),
+    Dotfile.new(local_path: "#{home_dir}/.gitconfig", repo_path: "common/gitconfig"),
+    Dotfile.new(local_path: "#{home_dir}/.zshrc", repo_path: "common/zshrc"),
+    Dotfile.new(local_path: "#{home_dir}/.pryrc", repo_path: "common/pryrc"),
+    Dotfile.new(local_path: "#{home_dir}/.irbrc", repo_path: "common/irbrc"),
+    Dotfile.new(local_path: "#{home_dir}/.aprc", repo_path: "common/aprc"),
+    Dotfile.new(local_path: "#{home_dir}/.ruby-version", repo_path: "common/ruby-version"),
+    Dotfile.new(local_path: "#{home_dir}/.oh-my-zsh/themes/ryanseys.zsh-theme", repo_path: "common/ryanseys.zsh-theme"),
   ]
 end
 
@@ -63,10 +72,10 @@ def personal_dotfiles
     puts "Detected: Personal Macbook 🤪"
 
     [
-      Dotfile.new(from: "#{home_dir}/.gitconfig_local", to: "personal/gitconfig"),
-      Dotfile.new(from: "#{home_dir}/.aliases_local", to: "personal/aliases"),
-      Dotfile.new(from: "#{home_dir}/.ruby-version", to: "personal/ruby-version"),
-      Dotfile.new(from: "#{home_dir}/.zshrc_local", to: "personal/zshrc"),
+      Dotfile.new(local_path: "#{home_dir}/.gitconfig_local", repo_path: "personal/gitconfig"),
+      Dotfile.new(local_path: "#{home_dir}/.aliases_local", repo_path: "personal/aliases"),
+      Dotfile.new(local_path: "#{home_dir}/.ruby-version", repo_path: "personal/ruby-version"),
+      Dotfile.new(local_path: "#{home_dir}/.zshrc_local", repo_path: "personal/zshrc"),
     ]
   end
 end
@@ -76,10 +85,10 @@ def spin_dotfiles
     puts "Detected: Spin 🌀"
 
     [
-      Dotfile.new(from: "#{home_dir}/.gitconfig_local", to: "shopify/gitconfig"),
-      Dotfile.new(from: "#{home_dir}/install_rubymine_on_spin.sh", to: "shopify/install_rubymine_on_spin.sh"),
-      Dotfile.new(from: "#{home_dir}/.aliases_local", to: "shopify/aliases"),
-      Dotfile.new(from: "#{home_dir}/.zshrc_local", to: "shopify/zshrc"),
+      Dotfile.new(local_path: "#{home_dir}/.gitconfig_local", repo_path: "shopify/gitconfig"),
+      Dotfile.new(local_path: "#{home_dir}/install_rubymine_on_spin.sh", repo_path: "shopify/install_rubymine_on_spin.sh"),
+      Dotfile.new(local_path: "#{home_dir}/.aliases_local", repo_path: "shopify/aliases"),
+      Dotfile.new(local_path: "#{home_dir}/.zshrc_local", repo_path: "shopify/zshrc"),
     ]
   end
 end
@@ -89,10 +98,10 @@ def shopify_dotfiles
     puts "Detected: Shopify Macbook 👨🏼‍💻"
 
     [
-      Dotfile.new(from: "#{home_dir}/.gitconfig_local", to: "shopify/gitconfig"),
-      Dotfile.new(from: "#{home_dir}/.aliases_local", to: "shopify/aliases"),
-      Dotfile.new(from: "#{home_dir}/.gitmessage", to: "shopify/gitmessage"),
-      Dotfile.new(from: "#{home_dir}/.zshrc_local", to: "shopify/zshrc"),
+      Dotfile.new(local_path: "#{home_dir}/.gitconfig_local", repo_path: "shopify/gitconfig"),
+      Dotfile.new(local_path: "#{home_dir}/.aliases_local", repo_path: "shopify/aliases"),
+      Dotfile.new(local_path: "#{home_dir}/.gitmessage", repo_path: "shopify/gitmessage"),
+      Dotfile.new(local_path: "#{home_dir}/.zshrc_local", repo_path: "shopify/zshrc"),
     ]
   end
 end
@@ -112,13 +121,13 @@ def install_dotfiles
 end
 
 def update_dotfiles
-  puts "Updating dotfiles..."
+  puts "Syncing computer dotfiles to this repo..."
 
   dotfiles.each do |dotfile|
-    dotfile.update
+    dotfile.sync_to_repo
   end
 
-  puts "Done updating dotfiles!\n"
+  puts "Done syncing dotfiles! Don't forget to review the changes and push!"
 end
 
 def has_oh_my_zsh?
