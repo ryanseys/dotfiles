@@ -52,6 +52,7 @@ def common_dotfiles
     Dotfile.new(from: "#{home_dir}/.zshrc", to: "common/zshrc"),
     Dotfile.new(from: "#{home_dir}/.pryrc", to: "common/pryrc"),
     Dotfile.new(from: "#{home_dir}/.irbrc", to: "common/irbrc"),
+    Dotfile.new(from: "#{home_dir}/.aprc", to: "common/aprc"),
     Dotfile.new(from: "#{home_dir}/.ruby-version", to: "common/ruby-version"),
     Dotfile.new(from: "#{home_dir}/.oh-my-zsh/themes/ryanseys.zsh-theme", to: "common/ryanseys.zsh-theme"),
   ]
