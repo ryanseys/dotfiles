@@ -100,8 +100,6 @@ def install_dotfiles
   dotfiles.each do |dotfile|
     dotfile.install
   end
-
-  puts "Done updating the repo's dotfiles! Check them diffs + git push it! 🤖"
 end
 
 def update_dotfiles
@@ -110,8 +108,6 @@ def update_dotfiles
   dotfiles.each do |dotfile|
     dotfile.update
   end
-
-  puts "Done updating your machine's dotfiles! Hope you didn't fuck anything up! 🤌🏼"
 end
 
 def has_oh_my_zsh?
@@ -128,8 +124,12 @@ def install_plugin_by_url(url)
   name = url.split('/').last
   install_dir = "#{home_dir}/.oh-my-zsh/custom/plugins/#{name}"
 
-  return if Dir.exist?(install_dir)
+  if Dir.exist?(install_dir)
+    puts "Plugin #{name} already installed."
+    return
+  end
 
+  puts "Cloning #{url} to #{install_dir}"
   system("git clone #{url} #{install_dir}")
 end
 
@@ -140,19 +140,27 @@ def install_oh_my_zsh_plugins
   install_plugin_by_url("https://github.com/zsh-users/zsh-syntax-highlighting")
 end
 
-
-def install_shit
-  puts "Installing shit..."
+def install_everything
+  install_dotfiles
   install_oh_my_zsh
+  install_oh_my_zsh_plugins
+
+  puts "Done installing everything!"
+end
+
+def update_everything
+  update_dotfiles
+
+  puts "Done updating your repo's dotfiles!"
 end
 
 def run_it!
   command = ARGV.shift
 
   if command == "install"
-    install_dotfiles
+    install_everything
   elsif command == "update"
-    update_dotfiles
+    update_everything
   else
     puts "Usage: #{$0} install|update"
     exit 1
