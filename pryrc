@@ -3,6 +3,7 @@ Pry.editor = 'vi'
 $LOAD_PATH << "~/.gem/ruby/3.1.2/gems/awesome_print-1.9.2/lib/"
 
 require 'awesome_print'
+AwesomePrint.irb!
 
 Pry.commands.alias_command 'c', 'continue' rescue nil
 Pry.commands.alias_command 's', 'step' rescue nil
