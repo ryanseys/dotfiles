@@ -30,3 +30,5 @@ source $ZSH/oh-my-zsh.sh
 source ~/.aliases
 source ~/.aliases_local
 source ~/.zshrc_local
+
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }

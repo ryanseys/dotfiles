@@ -18,7 +18,7 @@
   # `git pow` to amend staged changes and pushf
   pow = "!fn() { git add --all && git commit --amend --no-edit && git push --force-with-lease; }; fn"
   # `git fixup-pick` to pick a commit to fixup
-  fixup-pick = "!git log -n 10 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
+  fixup-pick = "!git log -n 30 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
   # `git fixup-done <branch this branch is based on>` to finish fixup
   fixup-done = "!git rebase -i --autosquash"
   # `git files bd61ad98` to list files in a given commit
@@ -40,7 +40,7 @@
   branches = branch -l
   undo = reset --soft HEAD~1
   cleanup = clean -df
-  pushf = push --force-with-lease
+  pushf = push --force-with-lease --force-if-includes
   diffc = diff --cached
   # `git amend-to <SHA>` to amend staged changes to a particular commit
 	amend-to = "!f() { SHA=`git rev-parse \"$1\"`; git stash -k && git commit --fixup \"$SHA\" && GIT_SEQUENCE_EDITOR=true git rebase --interactive --autosquash \"$SHA^\" && git stash pop; }; f"
