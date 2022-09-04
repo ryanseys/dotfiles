@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require "fileutils"
 
@@ -130,9 +131,7 @@ end
 def install_dotfiles
   puts "Installing dotfiles..."
 
-  dotfiles.each do |dotfile|
-    dotfile.install
-  end
+  dotfiles.each(&:install)
 
   puts "Done installing dotfiles!\n"
 end
@@ -140,19 +139,17 @@ end
 def update_dotfiles
   puts "Syncing computer dotfiles to this repo..."
 
-  dotfiles.each do |dotfile|
-    dotfile.sync_to_repo
-  end
+  dotfiles.each(&:sync_to_repo)
 
   puts "Done syncing dotfiles! Don't forget to review the changes and push!"
 end
 
-def has_oh_my_zsh?
+def oh_my_zsh_installed?
   !ENV.fetch("ZSH", nil).nil?
 end
 
 def install_oh_my_zsh
-  return if has_oh_my_zsh?
+  return if oh_my_zsh_installed?
 
   system('sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"')
 end
@@ -194,12 +191,13 @@ end
 def run_it!
   command = ARGV.shift
 
-  if command == "install"
+  case command
+  when "install"
     install_everything
-  elsif command == "update"
+  when "update"
     update_everything
   else
-    puts "Usage: #{$0} install|update"
+    puts "Usage: #{$PROGRAM_NAME} install|update"
     exit 1
   end
 end
