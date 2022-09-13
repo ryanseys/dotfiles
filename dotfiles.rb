@@ -12,7 +12,16 @@ class Dotfile
   end
 
   def sync_to_repo
-    return puts "File #{local_path} does not exist. Skipping sync..." unless File.exist?(local_path)
+    unless File.exist?(local_path)
+      puts "File #{local_path} does not exist. Skipping sync..."
+      return
+    end
+
+    unless File.exist?(repo_path)
+      puts "File #{repo_path} in repo does not yet exist... Copying..."
+      copy_file(local_path, repo_path, preserve_mtime: true)
+      return
+    end
 
     local_file_mtime = File.mtime(local_path)
     repo_file_mtime = File.mtime(repo_path)
@@ -82,6 +91,7 @@ def common_dotfiles
     Dotfile.new(local_path: "#{home_dir}/.aprc", repo_path: "common/aprc"),
     Dotfile.new(local_path: "#{home_dir}/.ruby-version", repo_path: "common/ruby-version"),
     Dotfile.new(local_path: "#{home_dir}/.oh-my-zsh/themes/ryanseys.zsh-theme", repo_path: "common/ryanseys.zsh-theme"),
+    Dotfile.new(local_path: "#{home_dir}/bin/convert_utc.rb", repo_path: "common/bin/convert_utc.rb"),
   ]
 end
 

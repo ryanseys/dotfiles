@@ -38,12 +38,15 @@
   new = checkout -b
   amend = commit --amend --no-edit
   branches = branch -l
+  brs = branch -l
   undo = reset --soft HEAD~1
   cleanup = clean -df
   pushf = push --force-with-lease --force-if-includes
   diffc = diff --cached
   # `git amend-to <SHA>` to amend staged changes to a particular commit
 	amend-to = "!f() { SHA=`git rev-parse \"$1\"`; git stash -k && git commit --fixup \"$SHA\" && GIT_SEQUENCE_EDITOR=true git rebase --interactive --autosquash \"$SHA^\" && git stash pop; }; f"
+  remotes = "remote -v"
+  currentbranch = "!git branch --contains HEAD | grep '*' | tr -s ' ' | cut -d ' ' -f2"
 [color]
   diff = auto
   status = auto
