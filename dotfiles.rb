@@ -39,6 +39,12 @@ class Dotfile
   end
 
   def install
+    unless File.exist?(local_path)
+      puts "File #{local_path} does not yet exist... Copying..."
+      copy_file(repo_path, local_path, preserve_mtime: true)
+      return
+    end
+
     local_file_mtime = File.mtime(local_path)
     repo_file_mtime = File.mtime(repo_path)
 
@@ -58,6 +64,7 @@ class Dotfile
 
   def copy_file(from, to, preserve_mtime: false)
     puts "Copying #{from} to #{to}..."
+    FileUtils.mkdir_p(File.dirname(to))
     FileUtils.cp(from, to, preserve: preserve_mtime)
   end
 end
