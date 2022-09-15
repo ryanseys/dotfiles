@@ -82,6 +82,7 @@
   path = ~/.gitconfig_local
 [gpg]
 	program = /opt/homebrew/bin/gpg
+	format = ssh
 [commit]
-	gpgsign = false
+	gpgsign = true
 	template = /Users/ryanseys/.gitmessage
