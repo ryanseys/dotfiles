@@ -92,6 +92,7 @@ def common_dotfiles
     Dotfile.new(local_path: "#{home_dir}/.gitignore_global", repo_path: "common/gitignore_global"),
     Dotfile.new(local_path: "#{home_dir}/.vimrc", repo_path: "common/vimrc"),
     Dotfile.new(local_path: "#{home_dir}/.gitconfig", repo_path: "common/gitconfig"),
+    Dotfile.new(local_path: "#{home_dir}/.gitconfig_1pass", repo_path: "common/gitconfig_1pass"),
     Dotfile.new(local_path: "#{home_dir}/.zshrc", repo_path: "common/zshrc"),
     Dotfile.new(local_path: "#{home_dir}/.pryrc", repo_path: "common/pryrc"),
     Dotfile.new(local_path: "#{home_dir}/.irbrc", repo_path: "common/irbrc"),
@@ -162,13 +163,26 @@ def update_dotfiles
 end
 
 def oh_my_zsh_installed?
-  !ENV.fetch("ZSH", nil).nil?
+  File.exist?("#{home_dir}/.oh-my-zsh/oh-my-zsh.sh")
 end
 
 def install_oh_my_zsh
-  return if oh_my_zsh_installed?
+  if oh_my_zsh_installed?
+    puts "Oh My Zsh is already installed!"
+    return
+  end
 
-  system('sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"')
+  puts "Installing Oh My Zsh..."
+
+  if File.exist?("#{home_dir}/.zshrc")
+    FileUtils.mv("#{home_dir}/.zshrc", "#{home_dir}/.zshrc.original")
+  end
+
+  system('ZSH= sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended')
+
+  if File.exist?("#{home_dir}/.zshrc")
+    FileUtils.rm("#{home_dir}/.zshrc")
+  end
 end
 
 def install_plugin_by_url(url)
@@ -192,9 +206,9 @@ def install_oh_my_zsh_plugins
 end
 
 def install_everything
-  install_dotfiles
   install_oh_my_zsh
   install_oh_my_zsh_plugins
+  install_dotfiles
 
   puts "Done installing everything!"
 end
