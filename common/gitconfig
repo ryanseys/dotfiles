@@ -80,5 +80,4 @@
 	prune = true
 [include]
   path = ~/.gitconfig_local
-[includeIf "gitdir:/Users/ryanseys/"]
-  path = ~/.gitconfig_1pass
+	path = /Users/ryanseys/.config/dev/gitconfig

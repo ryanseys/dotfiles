@@ -1,14 +1,8 @@
 [user]
 	name = Ryan Seys
 	email = ryan.seys@shopify.com
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINlVtRdRatvQ2OS5pXsY2qePd6F4HO8nFSZRs48KrGOi
-[include]
-	path = ~/.config/dev/gitconfig
-[commit]
-	template = ~/.gitmessage
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINlVtRdRatvQ2OS5pXsY2qePd6F4HO8nFSZRs48KrGOi ryan.seys@shopify.com
 [gpg]
   format = ssh
-[gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [commit]
   gpgsign = true
