@@ -1,4 +1,23 @@
 [alias]
+  mainbranch = "!git remote show origin | sed -n '/HEAD branch/s/.*: //p'"
+  # sync current branch up to latest main branch on remote
+  synced = "!git pull origin $(git mainbranch) --rebase"
+  # sync current branch up to latest current branch on remote
+  update = "!git pull origin $(git rev-parse --abbrev-ref HEAD) --rebase"
+  pr = "!f() { \
+       open \"$(git ls-remote --get-url $(git config --get branch.$(git rev-parse --abbrev-ref HEAD).remote) \
+       | sed 's|git@github.com:\\(.*\\)$|https://github.com/\\1|' \
+       | sed 's|\\.git$||'; \
+       )/compare/$(\
+       git config --get branch.$(git rev-parse --abbrev-ref HEAD).merge | cut -d '/' -f 3- \
+       )?expand=1\"; \
+  }; f"
+  hub = "!f() { \
+    open \"$(git ls-remote --get-url \
+    | sed 's|git@github.com:\\(.*\\)$|https://github.com/\\1|' \
+    | sed 's|\\.git$||'; \
+    )\"; \
+  }; f"
   # `git back` to switch back to previous branch
   back = checkout -
   # `git rmbr my-branch` deletes the branch named my-branch.
@@ -28,7 +47,7 @@
   lg = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --no-merges
   # `git file-history path/to/file.rb` to find all commits on a particular file
   file-history = log --all --full-history --summary --no-merges --full-diff --
-  st = status -sb
+  st = "status -sb"
   cm = commit -m
   aa = add --all
   co = checkout
@@ -65,8 +84,6 @@
 [core]
 	editor = vim
 	excludesfile = /Users/ryanseys/.gitignore_global
-  fsmonitor = true # monitor file system for changes https://github.blog/2022-06-29-improve-git-monorepo-performance-with-a-file-system-monitor/
-  untrackedCache = true # cache untracked files in memory to speed up git status https://github.blog/2022-06-29-improve-git-monorepo-performance-with-a-file-system-monitor/
 [pull]
 	rebase = true
 [init]
@@ -81,3 +98,5 @@
 [include]
   path = ~/.gitconfig_local
 	path = /Users/ryanseys/.config/dev/gitconfig
+[advice]
+	skippedCherryPicks = false

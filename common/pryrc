@@ -40,11 +40,11 @@ if Object.const_defined?("FactoryBot")
   puts "FactoryBot methods (e.g. create / build) are available!"
 end
 
-if Object.const_defined?("Rails")
-  include Rails.application.routes.url_helpers
-
-  puts "Rails url helpers automatically included! i.e. Rails.application.routes.url_helpers"
-end
+#if Object.const_defined?("Rails")
+#  include Rails.application.routes.url_helpers
+#
+#  puts "Rails url helpers automatically included! i.e. Rails.application.routes.url_helpers"
+#end
 
 # === HISTORY ===
 Pry::Commands.command /^$/, "repeat last command" do

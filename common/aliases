@@ -71,3 +71,8 @@ alias tc="bin/typecheck"
 alias fix="bin/typecheck && bin/style --include-branch-commits"
 alias dotfiles="cd ~/dotfiles"
 alias utc="$HOME/bin/convert_utc.rb"
+alias dt="dev test --include-branch-commits"
+alias dta="dev test -a"
+alias vrt="VCR=all dev test"
+# Build and run the app on my personal iPhone (SeysPhone)
+alias runios="yarn react-native run-ios --udid=00008120-000475463E78C01E"
