@@ -97,7 +97,6 @@ def common_dotfiles
     Dotfile.new(local_path: "#{home_dir}/.pryrc", repo_path: "common/pryrc"),
     Dotfile.new(local_path: "#{home_dir}/.irbrc", repo_path: "common/irbrc"),
     Dotfile.new(local_path: "#{home_dir}/.aprc", repo_path: "common/aprc"),
-    Dotfile.new(local_path: "#{home_dir}/.ruby-version", repo_path: "common/ruby-version"),
     Dotfile.new(local_path: "#{home_dir}/.oh-my-zsh/themes/ryanseys.zsh-theme", repo_path: "common/ryanseys.zsh-theme"),
     Dotfile.new(local_path: "#{home_dir}/bin/convert_utc.rb", repo_path: "common/bin/convert_utc.rb"),
   ]
