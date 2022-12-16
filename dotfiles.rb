@@ -128,7 +128,7 @@ def spin_dotfiles
 end
 
 def shopify_dotfiles
-  @shopify_dotfiles ||= if on_shopify_computer?
+  @shopify_dotfiles ||= if on_shopify_computer? && !on_spin?
     puts "Detected: Shopify Macbook 👨🏼‍💻"
 
     [
