@@ -4,20 +4,6 @@
   synced = "!git pull origin $(git mainbranch) --rebase"
   # sync current branch up to latest current branch on remote
   update = "!git pull origin $(git rev-parse --abbrev-ref HEAD) --rebase"
-  pr = "!f() { \
-       open \"$(git ls-remote --get-url $(git config --get branch.$(git rev-parse --abbrev-ref HEAD).remote) \
-       | sed 's|git@github.com:\\(.*\\)$|https://github.com/\\1|' \
-       | sed 's|\\.git$||'; \
-       )/compare/$(\
-       git config --get branch.$(git rev-parse --abbrev-ref HEAD).merge | cut -d '/' -f 3- \
-       )?expand=1\"; \
-  }; f"
-  hub = "!f() { \
-    open \"$(git ls-remote --get-url \
-    | sed 's|git@github.com:\\(.*\\)$|https://github.com/\\1|' \
-    | sed 's|\\.git$||'; \
-    )\"; \
-  }; f"
   # `git back` to switch back to previous branch
   back = checkout -
   # `git rmbr my-branch` deletes the branch named my-branch.
