@@ -1,4 +1,5 @@
 [alias]
+  remain = "!fn() { git main && git pull origin main && git back && git rebase main; }; fn"
   mainbranch = "!git remote show origin | sed -n '/HEAD branch/s/.*: //p'"
   # sync current branch up to latest main branch on remote
   synced = "!git pull origin $(git mainbranch) --rebase"
@@ -23,7 +24,7 @@
   # `git pow` to amend staged changes and pushf
   pow = "!fn() { git add --all && git commit --amend --no-edit && git push --force-with-lease; }; fn"
   # `git fixup-pick` to pick a commit to fixup
-  fixup-pick = "!git log -n 30 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
+  fixup-pick = "!git log -n 30 --pretty=format:'%h %s' --no-merges | fzf -m | cut -c -9 | xargs -o git commit --fixup"
   # `git fixup-done <branch this branch is based on>` to finish fixup
   fixup-done = "!git rebase -i --autosquash"
   # `git files bd61ad98` to list files in a given commit

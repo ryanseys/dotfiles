@@ -9,6 +9,7 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export PATH="$PATH:/Applications/RubyMine.app/Contents/MacOS"
 
 ZSH_THEME="ryanseys"
 DISABLE_UPDATE_PROMPT="true"
@@ -31,4 +32,4 @@ source ~/.aliases
 source ~/.aliases_local
 source ~/.zshrc_local
 
-[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
