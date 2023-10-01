@@ -1,3 +1,5 @@
+[user]
+  # These are set in .gitconfig_local
 [alias]
   remain = "!fn() { git main && git pull origin main && git back && git rebase main; }; fn"
   mainbranch = "!git remote show origin | sed -n '/HEAD branch/s/.*: //p'"
@@ -50,7 +52,7 @@
   pushf = push --force-with-lease --force-if-includes
   diffc = diff --cached
   # `git amend-to <SHA>` to amend staged changes to a particular commit
-	amend-to = "!f() { SHA=`git rev-parse \"$1\"`; git stash -k && git commit --fixup \"$SHA\" && GIT_SEQUENCE_EDITOR=true git rebase --interactive --autosquash \"$SHA^\" && git stash pop; }; f"
+  amend-to = "!f() { SHA=`git rev-parse \"$1\"`; git stash -k && git commit --fixup \"$SHA\" && GIT_SEQUENCE_EDITOR=true git rebase --interactive --autosquash \"$SHA^\" && git stash pop; }; f"
   remotes = "remote -v"
   currentbranch = "!git branch --contains HEAD | grep '*' | tr -s ' ' | cut -d ' ' -f2"
 [color]
@@ -60,30 +62,28 @@
 [branch]
   autosetuprebase = always
 [push]
-	default = current
+  default = current
 [filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-[user]
-  # These are set in .gitconfig_local
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
 [core]
-	editor = vim
-	excludesfile = /Users/ryanseys/.gitignore_global
+  editor = vim
+  excludesfile = /Users/ryanseys/.gitignore_global
 [pull]
-	rebase = true
+  rebase = true
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [remote "origin"]
-	prune = true
+  prune = true
 [rebase]
-	autoStash = true
-	autosquash = true
+  autoStash = true
+  autosquash = true
 [fetch]
-	prune = true
+  prune = true
 [include]
   path = ~/.gitconfig_local
-	path = /Users/ryanseys/.config/dev/gitconfig
+  path = /Users/ryanseys/.config/dev/gitconfig
 [advice]
-	skippedCherryPicks = false
+  skippedCherryPicks = false
