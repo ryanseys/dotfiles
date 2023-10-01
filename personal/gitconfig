@@ -1,4 +1,8 @@
 [user]
-	name = Ryan Seys
-	email = ryan@ryanseys.com
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHo8V3sffKa0fUJnvbmfHLmluO6vZMgnlXdfCMO5CcBo ryan@ryanseys.com
+  name = Ryan Seys
+  email = ryan@ryanseys.com
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHo8V3sffKa0fUJnvbmfHLmluO6vZMgnlXdfCMO5CcBo ryan@ryanseys.com
+[commit]
+  gpgsign = true
+[gpg]
+  format = ssh
