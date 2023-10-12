@@ -111,6 +111,7 @@ def personal_dotfiles
       Dotfile.new(local_path: "#{home_dir}/.aliases_local", repo_path: "personal/aliases"),
       Dotfile.new(local_path: "#{home_dir}/.ruby-version", repo_path: "personal/ruby-version"),
       Dotfile.new(local_path: "#{home_dir}/.zshrc_local", repo_path: "personal/zshrc"),
+      Dotfile.new(local_path: "#{home_dir}/.gemrc", repo_path: "personal/gemrc"),
     ]
   end
 end
