@@ -32,3 +32,10 @@ source ~/.aliases
 source ~/.aliases_local
 source ~/.zshrc_local
 
+
+# bun completions
+[ -s "/Users/ryanseys/.bun/_bun" ] && source "/Users/ryanseys/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
