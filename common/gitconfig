@@ -1,5 +1,3 @@
-[user]
-  # These are set in .gitconfig_local
 [alias]
   remain = "!fn() { git main && git pull origin main && git back && git rebase main; }; fn"
   mainbranch = "!git remote show origin | sed -n '/HEAD branch/s/.*: //p'"
@@ -68,6 +66,8 @@
   required = true
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
+[user]
+  # These are set in .gitconfig_local
 [core]
   editor = vim
   excludesfile = /Users/ryanseys/.gitignore_global
@@ -80,6 +80,7 @@
 [rebase]
   autoStash = true
   autosquash = true
+  updateRefs = true # when rebasing, update all branches that are chained to be rebased off the new base commit
 [fetch]
   prune = true
 [include]
