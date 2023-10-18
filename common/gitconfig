@@ -80,7 +80,7 @@
 [rebase]
   autoStash = true
   autosquash = true
-  updateRefs = true # when rebasing, update all branches that are chained to be rebased off the new base commit
+  # updateRefs = true # when rebasing, update all branches that are chained to be rebased off the new base commit
 [fetch]
   prune = true
 [include]
