@@ -13,6 +13,7 @@ export PATH="$PATH:/Applications/RubyMine.app/Contents/MacOS"
 
 ZSH_THEME="ryanseys"
 DISABLE_UPDATE_PROMPT="true"
+HOMEBREW_NO_ENV_HINTS=1
 
 plugins=(git history-substring-search zsh-autosuggestions zsh-completions ruby zsh-syntax-highlighting ssh-agent)
 
