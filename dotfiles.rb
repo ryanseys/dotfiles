@@ -121,7 +121,7 @@ def spin_dotfiles
     puts "Detected: Spin 🌀"
 
     [
-      Dotfile.new(local_path: "#{home_dir}/install_rubymine_on_spin.sh", repo_path: "shopify/install_rubymine_on_spin.sh"),
+      Dotfile.new(local_path: "#{home_dir}/.gitconfig_local", repo_path: "shopify/gitconfig"),
       Dotfile.new(local_path: "#{home_dir}/.aliases_local", repo_path: "shopify/aliases"),
       Dotfile.new(local_path: "#{home_dir}/.zshrc_local", repo_path: "shopify/zshrc"),
     ]
