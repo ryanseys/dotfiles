@@ -1,5 +1,34 @@
 #!/bin/zsh
 
+alias b="bundle"
+alias up="dev up"
+alias dsl="bin/tapioca dsl"
+alias style="bin/style --include-branch-commits"
+alias gitclean='git branch --merged | egrep -v "(^\*|master|main)" | xargs git branch -d'
+alias please="sudo"
+alias aliases="$EDITOR ~/.aliases"
+alias pull="git pull"
+alias rt="ruby -Itest"
+alias zshrc="$EDITOR ~/.zshrc"
+alias resource="source ~/.zshrc"
+alias gitconfig="$EDITOR ~/.gitconfig"
+alias gitconfig_local="$EDITOR ~/.gitconfig_local"
+alias gitaliases="$EDITOR ~/.gitconfig"
+alias be="bundle exec"
+alias tc="bin/typecheck"
+alias fix="bin/typecheck && bin/style --include-branch-commits"
+alias dotfiles="cd ~/dotfiles"
+alias utc="$HOME/bin/convert_utc.rb"
+alias dt="dev test --include-branch-commits"
+alias dta="dev test -a"
+alias vrt="VCR=all dev test"
+alias back="cd -"
+alias mine="/Applications/RubyMine.app/Contents/MacOS/rubymine"
+alias spindash="open https://spin-control.shopify.io/"
+
+# Build and run the app on my personal iPhone (SeysPhone)
+alias runios="yarn react-native run-ios"
+alias runiosdevice="yarn react-native run-ios --udid=00008120-000475463E78C01E"
 # git-open to open the current branch in github
 function git-open() {
   CURRENT_BRANCH=$(git branch --show-current)
@@ -49,35 +78,4 @@ function killport() {
 }
 
 alias favme="mysides add $(basename $(pwd)) file://$(pwd)"
-# Add directory to sidebar favorites.
-# Install with `brew install --cask mysides`
-# Usage: `fav code file:///Users/ryanseys/code` to that dir to Mac sidebar.
-alias fav="mysides add"
-alias up="dev up"
-alias dsl="bin/tapioca dsl"
-alias style="bin/style --include-branch-commits"
-alias gitclean='git branch --merged | egrep -v "(^\*|master|main)" | xargs git branch -d'
-alias please="sudo"
-alias aliases="$EDITOR ~/.aliases"
-alias pull="git pull"
-alias rt="ruby -Itest"
-alias zshrc="$EDITOR ~/.zshrc"
-alias resource="source ~/.zshrc"
-alias gitconfig="$EDITOR ~/.gitconfig"
-alias gitconfig_local="$EDITOR ~/.gitconfig_local"
-alias gitaliases="$EDITOR ~/.gitconfig"
-alias be="bundle exec"
-alias tc="bin/typecheck"
-alias fix="bin/typecheck && bin/style --include-branch-commits"
-alias dotfiles="cd ~/dotfiles"
-alias utc="$HOME/bin/convert_utc.rb"
-alias dt="dev test --include-branch-commits"
-alias dta="dev test -a"
-alias vrt="VCR=all dev test"
-alias back="cd -"
-alias mine="/Applications/RubyMine.app/Contents/MacOS/rubymine"
-alias spindash="open https://spin-control.shopify.io/"
 
-# Build and run the app on my personal iPhone (SeysPhone)
-alias runios="yarn react-native run-ios"
-alias runiosdevice="yarn react-native run-ios --udid=00008120-000475463E78C01E"

@@ -13,7 +13,7 @@ export PATH="$PATH:/Applications/RubyMine.app/Contents/MacOS"
 
 ZSH_THEME="ryanseys"
 DISABLE_UPDATE_PROMPT="true"
-HOMEBREW_NO_ENV_HINTS=1
+HOMEBREW_NO_ENV_HINTS="true"
 
 plugins=(git history-substring-search zsh-autosuggestions zsh-completions ruby zsh-syntax-highlighting ssh-agent)
 
@@ -36,6 +36,16 @@ source ~/.zshrc_local
 
 # bun completions
 [ -s "/Users/ryanseys/.bun/_bun" ] && source "/Users/ryanseys/.bun/_bun"
+
+# chruby setup
+if [[ -x /opt/homebrew/bin/brew ]]
+then
+  source /usr/local/share/chruby/chruby.sh
+  source /usr/local/share/chruby/auto.sh
+fi
+
+# shadowenv
+eval "$(shadowenv init zsh)"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
