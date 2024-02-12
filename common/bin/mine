@@ -1,3 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 
-open -a "RubyMine" --args "$@"
+# Usage: mine <pwd> --line <line_number> <relative path to file in pwd>
+# iTerm settings: Preferences > Profiles > Advanced > Run command > /Users/ryanseys/bin/mine --line \2 \1
+# NOTE: Need -n because it opens a socket to pass line number, but will use the existing window if it's already open.
+open -na "RubyMine.app" --args "$@"
