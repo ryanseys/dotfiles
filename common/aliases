@@ -23,7 +23,6 @@ alias dt="dev test --include-branch-commits"
 alias dta="dev test -a"
 alias vrt="VCR=all dev test"
 alias back="cd -"
-alias mine="/Applications/RubyMine.app/Contents/MacOS/rubymine"
 alias spindash="open https://spin-control.shopify.io/"
 
 # Build and run the app on my personal iPhone (SeysPhone)
@@ -77,5 +76,5 @@ function killport() {
   fi
 }
 
+alias dash="spindash"
 alias favme="mysides add $(basename $(pwd)) file://$(pwd)"
-

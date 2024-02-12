@@ -14,3 +14,18 @@ if Object.const_defined?("FactoryBot")
 
   puts "FactoryBot methods (e.g. create / build) are available!"
 end
+
+# begin
+#   require "/Users/ryanseys/src/github.com/Shopify/banking/test/support/helpers/stripe/integration_test_helper"
+
+#   include Stripe::IntegrationTestHelper
+
+#   # Turn off VCR and Webmock so we can hit the Stripe API.
+#   # VCR.turn_off!
+#   # WebMock.allow_net_connect!
+
+#   puts "Banking Stripe integration test helper loaded! e.g. Call create_onboarded_balance_account to create a new account."
+# rescue LoadError
+#   # Do nothing.
+#   puts "Banking Stripe integration test helper not loaded."
+# end

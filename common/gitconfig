@@ -67,6 +67,8 @@
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
 [user]
+	name = Ryan Seys
+	email = ryan.seys@shopify.com
   # These are set in .gitconfig_local
 [core]
   editor = vim
@@ -88,3 +90,9 @@
   path = /Users/ryanseys/.config/dev/gitconfig
 [advice]
   skippedCherryPicks = false
+[commit]
+	gpgsign = true
+[gpg]
+	program = /opt/homebrew/bin/gpg
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers

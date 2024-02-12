@@ -9,16 +9,15 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-export PATH="$PATH:/Applications/RubyMine.app/Contents/MacOS"
-
-ZSH_THEME="ryanseys"
-DISABLE_UPDATE_PROMPT="true"
-HOMEBREW_NO_ENV_HINTS="true"
+export PATH="/usr/local/share/chruby:$PATH"
+export ZSH_THEME="ryanseys"
+export DISABLE_UPDATE_PROMPT="true"
 
 plugins=(git history-substring-search zsh-autosuggestions zsh-completions ruby zsh-syntax-highlighting ssh-agent)
 
 # Disable Homebrew analytics
 export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_ENV_HINTS=1
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=7'
 
@@ -33,16 +32,18 @@ source ~/.aliases
 source ~/.aliases_local
 source ~/.zshrc_local
 
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
 
-# bun completions
-[ -s "/Users/ryanseys/.bun/_bun" ] && source "/Users/ryanseys/.bun/_bun"
+# Dev related.
+export PATH=$PATH:/opt/homebrew/bin
+export PATH="/opt/homebrew/opt/mysql-client@5.7/bin:$PATH"
 
 # chruby setup
-if [[ -x /opt/homebrew/bin/brew ]]
-then
-  source /usr/local/share/chruby/chruby.sh
-  source /usr/local/share/chruby/auto.sh
-fi
+# if [[ -x /usr/local/share/chruby/chruby.sh ]]
+# then
+#   source /usr/local/share/chruby/chruby.sh
+#   source /usr/local/share/chruby/auto.sh
+# fi
 
 # shadowenv
 eval "$(shadowenv init zsh)"
@@ -50,3 +51,6 @@ eval "$(shadowenv init zsh)"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+# cloudplatform: add Shopify clusters to your local kubernetes config
+export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/ryanseys/.kube/config:/Users/ryanseys/.kube/config.shopify.cloudplatform
+export PATH="/opt/homebrew/opt/openssl@1.1/bin:$PATH"
