@@ -40,11 +40,11 @@ export PATH="$HOME/bin:$PATH"
 export PATH="/opt/homebrew/opt/mysql-client@5.7/bin:$PATH"
 
 # chruby setup
-# if [[ -x /usr/local/share/chruby/chruby.sh ]]
-# then
-#   source /usr/local/share/chruby/chruby.sh
-#   source /usr/local/share/chruby/auto.sh
-# fi
+if [[ -x /opt/homebrew/opt/chruby/share/chruby/chruby.sh ]]
+then
+  source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+  source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+fi
 
 # shadowenv
 eval "$(shadowenv init zsh)"
