@@ -49,6 +49,7 @@
   cleanup = clean -df
   pushf = push --force-with-lease --force-if-includes
   diffc = diff --cached
+  wip = "!git add --all && git commit -m 'wip'"
   # `git amend-to <SHA>` to amend staged changes to a particular commit
   amend-to = "!f() { SHA=`git rev-parse \"$1\"`; git stash -k && git commit --fixup \"$SHA\" && GIT_SEQUENCE_EDITOR=true git rebase --interactive --autosquash \"$SHA^\" && git stash pop; }; f"
   remotes = "remote -v"
@@ -85,14 +86,16 @@
   # updateRefs = true # when rebasing, update all branches that are chained to be rebased off the new base commit
 [fetch]
   prune = true
-[include]
-  path = ~/.gitconfig_local
-  path = /Users/ryanseys/.config/dev/gitconfig
 [advice]
   skippedCherryPicks = false
 [commit]
-	gpgsign = true
+  gpgSign = true
 [gpg]
-	program = /opt/homebrew/bin/gpg
-[gpg "ssh"]
-	allowedSignersFile = ~/.config/git/allowed_signers
+  format = ssh
+# [gpg "ssh"]
+#   allowedSignersFile = ~/.config/git/allowed_signers
+[mergetool]
+  keepBackup = true
+[include]
+  path = ~/.gitconfig_local
+  path = ~/.config/dev/gitconfig
