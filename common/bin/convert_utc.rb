@@ -3,8 +3,8 @@
 
 require "date"
 require "active_support/time"
-require 'active_support/time_with_zone'
-require 'active_support/isolated_execution_state'
+require "active_support/time_with_zone"
+require "active_support/isolated_execution_state"
 
 date_string = ARGV.shift
 

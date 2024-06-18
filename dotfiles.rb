@@ -13,12 +13,12 @@ class Dotfile
 
   def sync_to_repo
     unless File.exist?(local_path)
-      puts "File #{local_path} does not exist. Skipping sync..."
+      puts "[SKIPPED] File #{local_path} does not exist."
       return
     end
 
     unless File.exist?(repo_path)
-      puts "File #{repo_path} in repo does not yet exist... Copying..."
+      puts "[UPDATED] File #{repo_path} in repo does not yet exist. Copied from local."
       copy_file(local_path, repo_path, preserve_mtime: true)
       return
     end
@@ -31,7 +31,7 @@ class Dotfile
     same_content = FileUtils.compare_file(local_path, repo_path)
 
     if local_older && !same_content
-      puts "Local file looks older than repo and has different contents so its likely out of date. Skipping..."
+      puts "[SKIPPED] Local file is older than repo and has different contents so it's likely out of date."
       return
     end
 
@@ -52,8 +52,8 @@ class Dotfile
     same_content = FileUtils.compare_file(local_path, repo_path)
 
     if local_newer && !same_content
-      puts "Local file #{local_path} looks newer than repo file #{repo_path} and has different contents."
-      puts "Run `./dotfiles.rb update` first?"
+      puts "[WARNING] Local file #{local_path} looks newer than repo file #{repo_path} and has different contents."
+      puts "[WARNING] Run `./dotfiles.rb update` first?"
       return
     end
 
@@ -174,19 +174,17 @@ def install_oh_my_zsh
 
   puts "Installing Oh My Zsh..."
 
-  if File.exist?("#{home_dir}/.zshrc")
-    FileUtils.mv("#{home_dir}/.zshrc", "#{home_dir}/.zshrc.original")
-  end
+  FileUtils.mv("#{home_dir}/.zshrc", "#{home_dir}/.zshrc.original") if File.exist?("#{home_dir}/.zshrc")
 
   system('ZSH= sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended')
 
-  if File.exist?("#{home_dir}/.zshrc")
-    FileUtils.rm("#{home_dir}/.zshrc")
-  end
+  return unless File.exist?("#{home_dir}/.zshrc")
+
+  FileUtils.rm("#{home_dir}/.zshrc")
 end
 
 def install_plugin_by_url(url)
-  name = url.split('/').last
+  name = url.split("/").last
   install_dir = "#{home_dir}/.oh-my-zsh/custom/plugins/#{name}"
 
   if Dir.exist?(install_dir)
