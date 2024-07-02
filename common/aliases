@@ -27,6 +27,7 @@ alias spindash="open https://spin-control.shopify.io/"
 alias python="python3"
 
 # Build and run the app on my personal iPhone (SeysPhone)
+alias mobile="dev cd banking-client"
 alias runios="yarn react-native run-ios"
 alias runiosdevice="yarn react-native run-ios --udid=00008120-000475463E78C01E"
 # git-open to open the current branch in github
@@ -78,4 +79,3 @@ function killport() {
 }
 
 alias dash="spindash"
-alias favme="mysides add $(basename $(pwd)) file://$(pwd)"

@@ -62,6 +62,7 @@
   autosetuprebase = always
 [push]
   default = current
+	autoSetupRemote = true
 [filter "lfs"]
   process = git-lfs filter-process
   required = true
@@ -86,16 +87,14 @@
   # updateRefs = true # when rebasing, update all branches that are chained to be rebased off the new base commit
 [fetch]
   prune = true
+[include]
+  path = ~/.gitconfig_local
+  path = /Users/ryanseys/.config/dev/gitconfig
 [advice]
   skippedCherryPicks = false
 [commit]
   gpgSign = true
-[gpg]
-  format = ssh
-# [gpg "ssh"]
-#   allowedSignersFile = ~/.config/git/allowed_signers
+[gpg "ssh"]
+  allowedSignersFile = ~/.config/git/allowed_signers
 [mergetool]
   keepBackup = true
-[include]
-  path = ~/.gitconfig_local
-  path = ~/.config/dev/gitconfig
