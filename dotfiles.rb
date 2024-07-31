@@ -337,6 +337,7 @@ class Dotfiles
     "discord",
     "firefox",
     "google-chrome",
+    "google-drive",
     "imageoptim",
     "iterm2",
     "jan",
