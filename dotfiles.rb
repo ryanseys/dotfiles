@@ -293,6 +293,7 @@ class Dotfiles
     "docker-compose",
     "ffmpeg",
     "fzf",
+    "font-inconsolata",
     "gnupg",
     "go",
     "git",
