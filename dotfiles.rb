@@ -253,9 +253,8 @@ class Dotfiles
 
   def install_homebrew_package(package_name)
     print "Checking if #{package_name} is installed..."
-    package_installed = installed_homebrew_packages.include?(package_name)
 
-    if package_installed
+    if homebrew_package_installed?(package_name)
       puts "✅ Installed."
     else
       puts "❌ Not installed."
@@ -266,6 +265,10 @@ class Dotfiles
 
   def installed_homebrew_packages
     @installed_homebrew_packages ||= `brew list`.split("\n").to_set
+  end
+
+  def homebrew_package_installed?(package_name)
+    installed_homebrew_packages.include?(package_name)
   end
 
   HOMEBREW_PACKAGES = [
@@ -315,10 +318,7 @@ class Dotfiles
   def install_homebrew_cask_package(package_name, app_path)
     return puts "Package '#{package_name}' installed at: '#{app_path}'" if File.exist?(app_path)
 
-    print "Checking if '#{package_name}' is installed..."
-    package_installed = system("brew list --cask #{package_name}", out: File::NULL)
-
-    if package_installed
+    if homebrew_package_installed?(package_name)
       puts "✅ Installed."
     else
       puts "❌ Not installed."
