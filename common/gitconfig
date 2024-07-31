@@ -98,3 +98,5 @@
   allowedSignersFile = ~/.config/git/allowed_signers
 [mergetool]
   keepBackup = true
+[pack]
+	window = 1

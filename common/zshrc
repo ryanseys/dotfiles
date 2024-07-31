@@ -40,14 +40,22 @@ export PATH="$HOME/bin:$PATH"
 export PATH="/opt/homebrew/opt/mysql-client@5.7/bin:$PATH"
 
 # chruby setup
-if [[ -f /usr/local/share/chruby/chruby.sh ]]
+if [[ -x /opt/homebrew/opt/chruby/share/chruby/chruby.sh ]]
 then
-  source /usr/local/share/chruby/chruby.sh
-  source /usr/local/share/chruby/auto.sh
+  source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+  source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+fi
+
+# Ngrok completions
+if command -v ngrok &>/dev/null; then
+  eval "$(ngrok completion)"
 fi
 
 # shadowenv
 eval "$(shadowenv init zsh)"
+
+# do not auto-untap homebrew
+export GITHUB_ACTIONS_HOMEBREW_SELF_HOSTED=1
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
