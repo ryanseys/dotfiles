@@ -203,10 +203,61 @@ def install_oh_my_zsh_plugins
   install_plugin_by_url("https://github.com/zsh-users/zsh-syntax-highlighting")
 end
 
+MINIMUM_RUBY_VERSION = Gem::Version.new("3.1.0")
+
+def check_ruby_installed_with_ruby_install
+  puts "Checking if Ruby is installed with ruby-install..."
+  # /Users/ryanseys/.rubies/ruby-3.3.4/bin/ruby
+  current_ruby_installed = `which ruby`
+
+  installed_with_ruby_install = current_ruby_installed.include?(".rubies")
+
+  if installed_with_ruby_install
+    puts "Ruby installed and configured with ruby-install. ✅"
+  else
+    puts "❌ Not installed."
+    puts "Please install ruby-install first."
+    exit 1
+  end
+end
+
+def install_ruby_install
+  print "Checking if have ruby-install..."
+  ruby_install_installed = system("which ruby-install", out: File::NULL)
+
+  if ruby_install_installed
+    puts "✅ Installed."
+  else
+    puts "❌ Not installed."
+    puts "Installing ruby-install..."
+    system("brew install ruby-install")
+  end
+end
+
+def install_rails
+  print "Checking if have ruby-install..."
+  ruby_install_installed = system("which ruby-install", out: File::NULL)
+
+  # Example Output: "ruby 3.2.2 (2023-03-30 revision e51014f9c0) [arm64-darwin23]"
+  current_ruby_version = `ruby --version`.split[1]
+  puts "Current Ruby version: #{current_ruby_version}"
+  current_ruby_version = Gem::Version.new(current_ruby_version)
+
+  if current_ruby_version < MINIMUM_RUBY_VERSION
+    puts "Ruby version is too old to install Rails"
+  else
+    puts "Found Ruby version '#{current_ruby_version}' which is good enough for Rails! ✅"
+  end
+
+  nil
+end
+
 def install_everything
-  install_oh_my_zsh
-  install_oh_my_zsh_plugins
-  install_dotfiles
+  # install_ruby_install
+  install_rails
+  # install_oh_my_zsh
+  # install_oh_my_zsh_plugins
+  # install_dotfiles
 
   puts "Done installing everything!"
 end
