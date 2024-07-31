@@ -331,6 +331,7 @@ class Dotfiles
     "zoom",
     "spotify",
     "1password",
+    "ollama",
   ]
 
   def install_homebrew_cask_package(cask_name)
