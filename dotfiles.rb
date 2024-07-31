@@ -387,6 +387,9 @@ class Dotfiles
   end
 
   def install_homebrew_cask_packages
+    return puts "Skipping homebrew install on work computer" unless on_personal_computer?
+    return puts "Homebrew not installed" unless system("which brew", out: File::NULL)
+
     puts "Installing Homebrew cask packages..."
 
     HOMEBREW_CASKS.each do |package|
