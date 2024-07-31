@@ -105,8 +105,6 @@ end
 
 def personal_dotfiles
   @personal_dotfiles ||= if on_personal_computer?
-    puts "Detected: Personal Macbook 🤪"
-
     [
       Dotfile.new(local_path: "#{home_dir}/.gitconfig_local", repo_path: "personal/gitconfig"),
       Dotfile.new(local_path: "#{home_dir}/.aliases_local", repo_path: "personal/aliases"),
@@ -205,22 +203,6 @@ end
 
 MINIMUM_RUBY_VERSION = Gem::Version.new("3.1.0")
 
-def check_ruby_installed_with_ruby_install
-  puts "Checking if Ruby is installed with ruby-install..."
-  # /Users/ryanseys/.rubies/ruby-3.3.4/bin/ruby
-  current_ruby_installed = `which ruby`
-
-  installed_with_ruby_install = current_ruby_installed.include?(".rubies")
-
-  if installed_with_ruby_install
-    puts "Ruby installed and configured with ruby-install. ✅"
-  else
-    puts "❌ Not installed."
-    puts "Please install ruby-install first."
-    exit 1
-  end
-end
-
 def install_ruby_install
   print "Checking if have ruby-install..."
   ruby_install_installed = system("which ruby-install", out: File::NULL)
@@ -234,30 +216,121 @@ def install_ruby_install
   end
 end
 
-def install_rails
-  print "Checking if have ruby-install..."
-  ruby_install_installed = system("which ruby-install", out: File::NULL)
+def check_ruby_installed_with_ruby_install
+  puts "Checking if Ruby is installed with ruby-install..."
+  current_ruby_installed = `which ruby` # /Users/ryanseys/.rubies/ruby-3.3.4/bin/ruby
 
-  # Example Output: "ruby 3.2.2 (2023-03-30 revision e51014f9c0) [arm64-darwin23]"
-  current_ruby_version = `ruby --version`.split[1]
-  puts "Current Ruby version: #{current_ruby_version}"
-  current_ruby_version = Gem::Version.new(current_ruby_version)
+  installed_with_ruby_install = current_ruby_installed.include?(".rubies")
 
-  if current_ruby_version < MINIMUM_RUBY_VERSION
-    puts "Ruby version is too old to install Rails"
+  if installed_with_ruby_install
+    puts "Ruby installed and configured with ruby-install. ✅"
   else
-    puts "Found Ruby version '#{current_ruby_version}' which is good enough for Rails! ✅"
+    puts "❌ Not installed."
+    puts "Please install ruby-install first."
+    exit 1
+  end
+end
+
+def install_rails
+  check_ruby_installed_with_ruby_install
+end
+
+def install_homebrew
+  print "Checking if Homebrew is installed..."
+  homebrew_installed = system("which brew", out: File::NULL)
+
+  if homebrew_installed
+    puts "✅ Installed."
+  else
+    puts "❌ Not installed."
+    puts "Installing Homebrew..."
+    system('NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"')
+  end
+end
+
+def install_homebrew_package(package_name)
+  print "Checking if #{package_name} is installed..."
+  package_installed = system("brew list #{package_name}", out: File::NULL)
+
+  if package_installed
+    puts "✅ Installed."
+  else
+    puts "❌ Not installed."
+    puts "Installing #{package_name}..."
+    system("brew install #{package_name}")
+  end
+end
+
+HOMEBREW_PACKAGES = [
+  "autoconf",
+  "ack",
+  "chruby",
+  "ctags",
+  "cmake",
+  "coreutils", # GNU core utilities
+  "cocoapods",
+  "curl",
+  "ffmpeg",
+  "fzf",
+  "git",
+  "git-lfs",
+  "htop",
+  "gh", # GitHub CLI
+  "jq",
+  "kafka",
+  "llvm",
+  "nginx",
+  "nmap",
+  "node",
+  "openssl@3",
+  "openjdk",
+  "podman",
+  "podman-compose",
+  "python3",
+  "rename",
+  "redis",
+  "rust",
+  "sqlite",
+  "stripe",
+  "trash",
+  "tree",
+  "watch",
+  "wget",
+  "yarn",
+  "visual-studio-code",
+  "zsh",
+  # "zsh-syntax-highlighting",
+]
+
+def install_homebrew_cask_package(package_name)
+  print "Checking if #{package_name} is installed..."
+  package_installed = system("brew list --cask #{package_name}", out: File::NULL)
+
+  if package_installed
+    puts "✅ Installed."
+  else
+    puts "❌ Not installed."
+    puts "Installing #{package_name}..."
+    system("brew install --cask #{package_name}")
   end
 
-  nil
+end
+
+def install_homebrew_packages
+  HOMEBREW_PACKAGES.each do |package|
+    install_homebrew_package(package)
+  end
 end
 
 def install_everything
-  # install_ruby_install
+  install_homebrew
+  install_homebrew_packages
+  install_ruby_install
   install_rails
-  # install_oh_my_zsh
-  # install_oh_my_zsh_plugins
-  # install_dotfiles
+
+  install_oh_my_zsh
+  install_oh_my_zsh_plugins
+  install_dotfiles
 
   puts "Done installing everything!"
 end
@@ -270,6 +343,10 @@ end
 
 def run_it!
   command = ARGV.shift
+
+  puts "Detected: Personal Macbook 🤪" if on_personal_computer?
+  puts "Detected: Shopify Macbook 👨🏼‍💻" if on_shopify_computer?
+  puts "Detected: Spin Environment 🌀" if on_spin?
 
   case command
   when "install"
