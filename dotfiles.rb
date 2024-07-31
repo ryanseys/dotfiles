@@ -282,7 +282,9 @@ class Dotfiles
   HOMEBREW_PACKAGES = [
     "autoconf",
     "ack",
+    "bash",
     "chruby",
+    "cloudflared",
     "ctags",
     "coreutils", # GNU core utilities
     "curl",
@@ -320,18 +322,37 @@ class Dotfiles
     "zsh",
   ]
 
-  HOMEBREW_CASK_PACKAGES = [
-    "jan",
-    "visual-studio-code",
-    "logseq",
-    "google-chrome",
-    "firefox",
-    "iterm2",
-    "slack",
-    "zoom",
-    "spotify",
+  HOMEBREW_CASKS = [
     "1password",
+    "appcleaner",
+    "betterdisplay",
+    "calibre",
+    "cloudflare-warp",
+    "discord",
+    "firefox",
+    "google-chrome",
+    "imageoptim",
+    "iterm2",
+    "jan",
+    "keepingyouawake",
+    "logi-options-plus",
+    "logseq",
+    "monitorcontrol",
+    "notion",
     "ollama",
+    "podman-desktop",
+    "raycast",
+    "rectangle",
+    "slack",
+    "spotify",
+    "the-unarchiver",
+    "tableplus",
+    "todoist",
+    "tor-browser",
+    "visual-studio-code",
+    "warp", # warp.dev
+    "whatsapp",
+    "zoom",
   ]
 
   def install_homebrew_cask_package(cask_name)
@@ -359,7 +380,7 @@ class Dotfiles
   def install_homebrew_cask_packages
     puts "Installing Homebrew cask packages..."
 
-    HOMEBREW_CASK_PACKAGES.each do |package|
+    HOMEBREW_CASKS.each do |package|
       install_homebrew_cask_package(package)
     end
   end
