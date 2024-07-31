@@ -293,6 +293,7 @@ class Dotfiles
     "docker-compose",
     "ffmpeg",
     "fzf",
+    "gpg",
     "go",
     "git",
     "git-lfs",
