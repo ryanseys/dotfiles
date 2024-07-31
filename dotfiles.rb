@@ -351,7 +351,7 @@ class Dotfiles
     "podman-desktop",
     "raycast",
     "rectangle",
-    # "rubymine",
+    "rubymine",
     "slack",
     "spotify",
     "the-unarchiver",
