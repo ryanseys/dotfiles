@@ -305,7 +305,6 @@ class Dotfiles
     "wget",
     "yarn",
     "zsh",
-  # "zsh-syntax-highlighting",
   ]
 
   HOMEBREW_CASK_PACKAGES = {
