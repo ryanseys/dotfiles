@@ -315,17 +315,18 @@ class Dotfiles
   HOMEBREW_CASK_PACKAGES = {
     "jan": '/Applications/Jan.app',
     "visual-studio-code": '/Applications/Visual Studio Code.app',
+    "logseq": '/Applications/Logseq.app',
   }
 
-  def install_homebrew_cask_package(package_name, app_path)
-    return puts "Package '#{package_name}' installed at: '#{app_path}'" if File.exist?(app_path)
+  def install_homebrew_cask_package(package, app_path)
+    return puts "Installed: #{package} at '#{app_path}'" if File.exist?(app_path)
 
-    if homebrew_package_installed?(package_name)
+    if homebrew_package_installed?(package)
       puts "✅ Installed."
     else
       puts "❌ Not installed."
-      puts "Installing #{package_name}..."
-      system("brew install --cask #{package_name}")
+      puts "Installing #{package}..."
+      system("brew install --cask #{package}")
     end
 
   end
