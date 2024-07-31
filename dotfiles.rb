@@ -294,7 +294,7 @@ class Dotfiles
     "openssl@3",
     "podman",
     "podman-compose",
-    "postgresql@14",
+    "postgresql@16",
     "python@3.12",
     "rename",
     "redis",
@@ -304,9 +304,11 @@ class Dotfiles
     "shellcheck",
     "trash",
     "tree",
+    "tmux",
     "watch",
     "wget",
     "yarn",
+    "vim",
     "zsh",
   ]
 
@@ -345,7 +347,6 @@ class Dotfiles
     HOMEBREW_CASK_PACKAGES.each do |package, app_path|
       install_homebrew_cask_package(package, app_path)
     end
-
   end
 
   def install_everything
@@ -365,8 +366,22 @@ class Dotfiles
     puts "Done installing everything!"
   end
 
+  def update_homebrew_packages
+    return unless on_personal_computer?
+
+    puts "Updating Homebrew packages..."
+
+    system("brew update")
+    system("brew upgrade")
+    system("brew cleanup")
+    system("brew doctor")
+
+    puts "Done updating Homebrew packages!"
+  end
+
   def update_everything
     update_dotfiles
+    update_homebrew_packages
 
     puts "Done updating everything!"
   end
