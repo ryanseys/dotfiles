@@ -331,10 +331,8 @@ class Dotfiles
   end
 
   def install_homebrew_packages
-    return puts "Homebrew not installed" unless system("which brew", out: File::NULL)
     return puts "Skipping homebrew install on work computer" unless on_personal_computer?
-
-    puts "Installing Homebrew packages..."
+    return puts "Homebrew not installed" unless system("which brew", out: File::NULL)
 
     HOMEBREW_PACKAGES.each do |package|
       install_homebrew_package(package)
