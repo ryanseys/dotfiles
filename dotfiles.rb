@@ -346,6 +346,7 @@ class Dotfiles
     "keepingyouawake",
     "logi-options-plus",
     "logseq",
+    "messenger", # Facebook Messenger
     "monitorcontrol",
     "notion",
     "ollama",
