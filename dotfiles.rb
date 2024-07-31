@@ -267,8 +267,16 @@ class Dotfiles
     @installed_homebrew_packages ||= `brew list`.split("\n").to_set
   end
 
+  def installed_homebrew_casks
+    @installed_homebrew_casks ||= `brew list --cask`.split("\n").to_set
+  end
+
   def homebrew_package_installed?(package_name)
     installed_homebrew_packages.include?(package_name)
+  end
+
+  def homebrew_cask_installed?(package_name)
+    installed_homebrew_casks.include?(package_name)
   end
 
   HOMEBREW_PACKAGES = [
@@ -312,21 +320,28 @@ class Dotfiles
     "zsh",
   ]
 
-  HOMEBREW_CASK_PACKAGES = {
-    "jan": '/Applications/Jan.app',
-    "visual-studio-code": '/Applications/Visual Studio Code.app',
-    "logseq": '/Applications/Logseq.app',
-  }
+  HOMEBREW_CASK_PACKAGES = [
+    "jan",
+    "visual-studio-code",
+    "logseq",
+    "google-chrome",
+    "firefox",
+    "iterm2",
+    "slack",
+    "zoom",
+    "spotify",
+    "1password",
+  ]
 
-  def install_homebrew_cask_package(package, app_path)
-    return puts "Installed: #{package} at '#{app_path}'" if File.exist?(app_path)
+  def install_homebrew_cask_package(cask_name)
+    print "Checking if cask #{cask_name} is installed... "
 
-    if homebrew_package_installed?(package)
+    if homebrew_cask_installed?(cask_name)
       puts "✅ Installed."
     else
       puts "❌ Not installed."
-      puts "Installing #{package}..."
-      system("brew install --cask #{package}")
+      puts "Installing #{cask_name}..."
+      system("brew install --cask #{cask_name} --force")
     end
 
   end
@@ -343,8 +358,8 @@ class Dotfiles
   def install_homebrew_cask_packages
     puts "Installing Homebrew cask packages..."
 
-    HOMEBREW_CASK_PACKAGES.each do |package, app_path|
-      install_homebrew_cask_package(package, app_path)
+    HOMEBREW_CASK_PACKAGES.each do |package|
+      install_homebrew_cask_package(package)
     end
   end
 
