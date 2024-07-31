@@ -221,7 +221,7 @@ class Dotfiles
 
   def check_ruby_installed_with_ruby_install
     puts "Checking if Ruby is installed with ruby-install..."
-    current_ruby_installed = `which ruby` # /Users/ryanseys/.rubies/ruby-3.3.4/bin/ruby
+    current_ruby_installed = `which ruby` # /Users/ryanseys/.rubies/ruby-3.3.4/bin/ruby or /opt/rubies/ruby-3.3.4/bin/ruby
 
     installed_with_ruby_install = current_ruby_installed.include?("rubies")
 
