@@ -369,19 +369,35 @@ class Dotfiles
   def update_homebrew_packages
     return unless on_personal_computer?
 
-    puts "Updating Homebrew packages..."
-
+    puts "Running brew update..."
     system("brew update")
+
+    puts "Running brew upgrade..."
     system("brew upgrade")
+
+    puts "Running brew cleanup..."
     system("brew cleanup")
+
+    puts "Running brew doctor..."
     system("brew doctor")
 
     puts "Done updating Homebrew packages!"
   end
 
+  def update_mac_os
+    return unless on_personal_computer?
+
+    puts "Updating macOS..."
+
+    system("softwareupdate -ia")
+
+    puts "Done updating macOS!"
+  end
+
   def update_everything
     update_dotfiles
     update_homebrew_packages
+    update_mac_os
 
     puts "Done updating everything!"
   end
