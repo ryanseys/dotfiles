@@ -334,6 +334,7 @@ class Dotfiles
     "betterdisplay",
     "calibre",
     "cloudflare-warp",
+    "chatgpt",
     "discord",
     "firefox",
     "google-chrome",
@@ -373,7 +374,6 @@ class Dotfiles
       puts "Installing #{cask_name}..."
       system("brew install --cask #{cask_name} --force")
     end
-
   end
 
   def install_homebrew_packages
